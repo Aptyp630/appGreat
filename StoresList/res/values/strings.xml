@@ -3,4 +3,8 @@
     <string name="app_name">StoresList</string>
     <string name="stores">Stores</string>
     <string name="map">Map</string>
+    <string name="cancel">Cancel</string>
+    <string name="product_title">Product Title:</string>
+    <string name="product_id">Product ID:</string>
+    <string name="product_desc">Product Description:</string>
 </resources>

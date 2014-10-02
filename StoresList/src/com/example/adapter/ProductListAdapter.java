@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.R;
 import com.example.models.Product;
-
 import java.util.List;
 
 
@@ -49,8 +48,9 @@ public class ProductListAdapter extends BaseAdapter{
         Product newProduct = getItem(position);
 
         TextView textView = (TextView) view.findViewById(R.id.text_item);
+        //textView.setText(String.valueOf(newProduct.getProductId()));
         textView.setText(newProduct.getTitle());
-
+        //textView.setText(newProduct.getDescription());
         return view;
     }
 }
