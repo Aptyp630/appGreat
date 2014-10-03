@@ -1,12 +1,14 @@
 package com.example.singlton;
 
 import android.content.Context;
+import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.constans.Constans;
 import com.example.models.Product;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +46,7 @@ public class QueryToServer {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    //Log.v("TAG", volleyError.getMessage());
+                    Log.v(Constans.LOG_TAG, volleyError.getMessage());
                 }
             });
             requestQueue.add(jsonObjectRequest);

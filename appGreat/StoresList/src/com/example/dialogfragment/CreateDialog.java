@@ -10,13 +10,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.R;
+import com.example.constans.Constans;
+import com.example.models.Product;
 
 public class CreateDialog extends DialogFragment implements View.OnClickListener{
-    private final static String LOG_TAG = "showTag";
 
     public View onCreateView (LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
-        int productID = this.getArguments().getInt("id");
-        String productDescription = this.getArguments().getString("description");
+
+        Product product = (Product) this.getArguments().getSerializable(Constans.PRODUCT);
+        String productTitle = product.getTitle();
+        String productDescription = product.getDescription();
+        //int productID = this.getArguments().getInt("id");
+        //String productDescription = this.getArguments().getString("description");
 
         View view = layoutInflater.inflate(R.layout.dialog_fragment, null);
         getDialog().setTitle("Product overview:");
@@ -24,7 +29,7 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
         TextView textId = (TextView) view.findViewById(R.id.productId);
         TextView textDesc = (TextView) view.findViewById(R.id.productDesc);
 
-        textId.setText("Product ID: " +productID);
+        textId.setText("Product Title: " +productTitle);
         textDesc.setText("Product Description: " +productDescription);
 
         Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
@@ -38,7 +43,7 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
             case R.id.btnCancel : dismiss();
                 break;
         }
-        Log.v(LOG_TAG, "Dialog Dismissed");
+        Log.v(Constans.LOG_TAG, "Dialog Dismissed");
     }
 
     public void onDismiss(DialogInterface dialog){

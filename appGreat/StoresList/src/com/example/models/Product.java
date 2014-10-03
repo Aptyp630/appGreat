@@ -1,10 +1,19 @@
 package com.example.models;
 
-public class Products {
+import java.io.Serializable;
 
+public class Product implements Serializable{
+
+    private static final long serialVersionUID = 0L;
     private int productId;
     private String title;
     private String description;
+
+    public Product(int productId, String title, String description) {
+        this.productId = productId;
+        this.title = title;
+        this.description = description;
+    }
 
     public int getProductId() {
         return productId;

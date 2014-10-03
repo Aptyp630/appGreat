@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import com.example.adapter.ProductListAdapter;
+import com.example.constans.Constans;
 import com.example.dialogfragment.CreateDialog;
 import com.example.models.Product;
 import com.example.singlton.QueryToServer;
@@ -12,7 +13,6 @@ import com.example.singlton.QueryToServer;
 import java.util.List;
 
 public class StoreFragment extends ListFragment{
-    private final static String FRG_LOG = "fragmentLog";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -40,11 +40,12 @@ public class StoreFragment extends ListFragment{
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         CreateDialog productDialog = new CreateDialog();
-        productDialog.show(getFragmentManager(), FRG_LOG);
+        productDialog.show(getFragmentManager(), Constans.FRG_LOG);
         Product product = (Product) l.getItemAtPosition(position);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", product.getProductId());
-        bundle.putString("description", String.valueOf(product.getDescription()));
+        bundle.putSerializable(Constans.PRODUCT, product);
+//        bundle.putInt("id", product.getProductId());
+//        bundle.putString("description", String.valueOf(product.getDescription()));
         productDialog.setArguments(bundle);
     }
 }

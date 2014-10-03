@@ -6,12 +6,11 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import com.example.R;
+import com.example.constans.Constans;
 import com.example.fragments.MapFragment;
 import com.example.fragments.StoreFragment;
 
 public class Main extends Activity implements ActionBar.TabListener {
-    private static final String TAG_STORES = "stores";
-    private static final String TAG_MAP = "layout_for_two_fragments";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class Main extends Activity implements ActionBar.TabListener {
         Tab tabStore = actionbar.newTab();
         tabStore.setText(R.string.stores);
         tabStore.setTabListener(this);
-        tabStore.setTag(TAG_STORES);
+        tabStore.setTag(Constans.TAG_STORES);
         actionbar.addTab(tabStore);
         tabStore.setTabListener(this);
 
@@ -35,7 +34,7 @@ public class Main extends Activity implements ActionBar.TabListener {
         Tab tabMap = actionbar.newTab();
         tabMap.setText(R.string.map);
         tabMap.setTabListener(this);
-        tabMap.setTag(TAG_MAP);
+        tabMap.setTag(Constans.TAG_MAP);
         actionbar.addTab(tabMap);
         tabMap.setTabListener(this);
     }
@@ -43,12 +42,12 @@ public class Main extends Activity implements ActionBar.TabListener {
     //выбранный таб
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        if(TAG_STORES.equals(tab.getTag())){
+        if(Constans.TAG_STORES.equals(tab.getTag())){
             StoreFragment storeList = new StoreFragment();
-            ft.replace(R.id.fragments_view_two, storeList, TAG_STORES);
+            ft.replace(R.id.fragments_view_two, storeList, Constans.TAG_STORES);
         }else{
             MapFragment storeMap = new MapFragment();
-            ft.replace(R.id.fragments_view_two, storeMap, TAG_MAP);
+            ft.replace(R.id.fragments_view_two, storeMap, Constans.TAG_MAP);
         }
     }
 
