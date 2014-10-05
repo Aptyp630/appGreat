@@ -24,7 +24,7 @@ public class StoreFragment extends ListFragment {
        StoresLoadController storesLoadController = new StoresLoadController(productListAdapter);
         super.onActivityCreated(savedInstanceState);
         callGetStores();
-        storesLoadController.requestProducts();
+        storesLoadController.requestProducts(getActivity());
     }
 
     private void callGetStores() {

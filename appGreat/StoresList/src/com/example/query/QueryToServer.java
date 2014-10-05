@@ -22,10 +22,8 @@ public class QueryToServer {
 
     //СОЗДАНИЕ ОЧЕРЕДИ ЗАПРОСОВ
     //ВЫЗОВ МЕТОДОВ, КОТОРЫЕ ПАРСИЛИ ОБЪЕКТ И МАССИВ
-    public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, Context context, ProductResult currentPage) {
-        int current = Integer.parseInt(String.valueOf(currentPage.getCurrentPage()));
-            if (current == 1) {
-                String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+current;
+    public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, Context context, int currentPage) {
+                String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+currentPage;
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
@@ -41,8 +39,6 @@ public class QueryToServer {
                     }
                 });
                 requestQueue.add(jsonObjectRequest);
-                current++;
-            }
         return showProductListener;
     }
     //##################################################################################
@@ -82,6 +78,6 @@ public class QueryToServer {
 
     //СОЗДАНИЕ ИНТЕРФЕЙСА СЛУШАТЕЛЯ
     public interface OnResponseListener {
-        public void onProductsReceived(List<Product> products);
+        public void onProductsReceived(ProductResult productResult);
     }
 }
