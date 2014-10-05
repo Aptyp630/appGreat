@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.constans.Constans;
+import com.example.models.Product;
 
 //create DataBaseAdaptor
 public class DataBaseAdaptor{
 
-    private ContentValues contentValues;
     private DataBase dataBase;
     private Context context;
     private SQLiteDatabase sqLiteDatabase;
@@ -33,12 +33,19 @@ public class DataBaseAdaptor{
     }
 
     //setData in DB
-    public long insertRow(int productId, String productTitle, String productDescription){
-        contentValues.put(ProductTable.PRODUCT_ID, productId);
-        contentValues.put(ProductTable.PRODUCT_TITLE, productTitle);
-        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, productDescription);
+    public long saveOrUpdate(Product product){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
+        contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
+        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         return sqLiteDatabase.insert(ProductTable.TABLE_NAME, null, contentValues);
     }
+
+    /*public Product getProduct(Product product){
+        Cursor cursor;
+        cursor = sqLiteDatabase.query(ProductTable.TABLE_NAME, )
+        return  null;
+    }*/
 
     //return all data in DB
     public Cursor returnData(){
@@ -51,6 +58,7 @@ public class DataBaseAdaptor{
 
     //upDate Rows
     public boolean updateRows(long rowID, int productId, String productTitle, String productDescription){
+        ContentValues contentValues = new ContentValues();
         String where = ProductTable.UID + "=" + rowID;
         contentValues.put(String.valueOf(ProductTable.PRODUCT_ID), productId);
         contentValues.put(ProductTable.PRODUCT_TITLE, productTitle);
@@ -58,7 +66,7 @@ public class DataBaseAdaptor{
         return sqLiteDatabase.update(ProductTable.TABLE_NAME, contentValues, where, null) != 0;
     }
 
-    private static class DataBase extends SQLiteOpenHelper{
+    private static class DataBase extends SQLiteOpenHelper {
 
         public DataBase(Context context) {
             super(context, ProductTable.TABLE_NAME, null, ProductTable.DB_VERSION);
