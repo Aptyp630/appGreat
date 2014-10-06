@@ -4,14 +4,19 @@ import java.util.List;
 
 public class ProductResult {
 
-    private Pagination currentPage;
-    private List<Product> product;
+    private Pagination pagination;
+    private List<Product> products;
 
-    public Pagination getCurrentPage() {
-        return currentPage;
+    public ProductResult(Pagination pagination, List<Product> products) {
+        this.pagination = pagination;
+        this.products = products;
+    }
+
+    public Pagination getPagination() {
+        return pagination;
     }
 
     public List<Product> getProduct() {
-        return product;
+        return products;
     }
 }

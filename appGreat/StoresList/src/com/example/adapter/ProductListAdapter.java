@@ -8,18 +8,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.R;
 import com.example.models.Product;
+
 import java.util.List;
 
 
 public class ProductListAdapter extends BaseAdapter{
 
-    Context context;
-    List<Product> productList;
-    LayoutInflater inflater;
+    private Context context;
+    private List<Product> productList;
+    private LayoutInflater inflater;
 
-    public ProductListAdapter(Context context, List<Product> productList){
+    public ProductListAdapter(Context context){
         this.context = context;
-        this.productList = productList;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

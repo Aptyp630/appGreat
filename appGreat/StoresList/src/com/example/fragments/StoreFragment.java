@@ -9,37 +9,26 @@ import com.example.constans.Constans;
 import com.example.controller.StoresLoadController;
 import com.example.dialogfragment.CreateDialog;
 import com.example.models.Product;
-import com.example.models.ProductResult;
-import com.example.query.QueryToServer;
 
 import java.util.List;
 
 public class StoreFragment extends ListFragment {
 
-    ProductListAdapter productListAdapter;
-    ProductResult productResult;
-
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-       StoresLoadController storesLoadController = new StoresLoadController(productListAdapter);
-        super.onActivityCreated(savedInstanceState);
-        callGetStores();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ProductListAdapter productListAdapter = new ProductListAdapter(this.getActivity());
+        StoresLoadController storesLoadController = new StoresLoadController(productListAdapter);
         storesLoadController.requestProducts(getActivity());
     }
 
-    private void callGetStores() {
-        QueryToServer.OnResponseListener listener = new QueryToServer.OnResponseListener() {
-            @Override
-            public void onProductsReceived(List<Product> p) {
-                initList(p);
-            }
-        };
-        QueryToServer.callGetProducts(listener, getActivity(), productResult);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     public void initList(List<Product> p){
-        ProductListAdapter adapter = new ProductListAdapter(getActivity(), p);
-        setListAdapter(adapter);
+        setListAdapter(getListAdapter());
     }
 
     //Callback for listView in ListFragment

@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.constans.Constans;
+import com.example.models.Pagination;
 import com.example.models.Product;
 import com.example.models.ProductResult;
 import org.json.JSONArray;
@@ -22,15 +23,16 @@ public class QueryToServer {
 
     //СОЗДАНИЕ ОЧЕРЕДИ ЗАПРОСОВ
     //ВЫЗОВ МЕТОДОВ, КОТОРЫЕ ПАРСИЛИ ОБЪЕКТ И МАССИВ
-    public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, Context context, int currentPage) {
+    public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, Context context, final int currentPage) {
                 String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+currentPage;
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        parseProducts(jsonObject);
+                        Pagination pagination = parsePagination(jsonObject);
                         List<Product> product = parseProducts(jsonObject);
-                        showProductListener.onProductsReceived(product);
+                        ProductResult productResult = new ProductResult(pagination, product);
+                        showProductListener.onProductsReceived(productResult);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -44,15 +46,17 @@ public class QueryToServer {
     //##################################################################################
 
     //РАСПАРСИЛ ОБЪЕКТ
-    private static void parsePagination(JSONObject jsonObject){
+    private static Pagination parsePagination(JSONObject jsonObject){
         try {
             JSONObject paginationJson = jsonObject.getJSONObject("pagination");
-                {
                     int total_page = paginationJson.getInt("total_page");
                     int current_page = paginationJson.getInt("current_page");
                     int per_page = paginationJson.getInt("per_page");
-                }
-        } catch (JSONException e) {e.printStackTrace();}
+            Pagination pagination = new Pagination(total_page, current_page, per_page);
+            return pagination;
+        } catch (JSONException e) {e.printStackTrace();
+        }
+        return null;
     }
     //##################################################################################
 

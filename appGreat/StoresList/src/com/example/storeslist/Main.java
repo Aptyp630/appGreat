@@ -1,42 +1,40 @@
 package com.example.storeslist;
 
-import android.support.v7.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import com.example.R;
 import com.example.constans.Constans;
 import com.example.fragments.MapFragment;
 import com.example.fragments.StoreFragment;
 
-public class Main extends Activity implements ActionBar.TabListener {
+public class Main extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         //возвращает объект actionbar в этом Activity
-        android.app.ActionBar actionbar = getActionBar();
-        //actionbar.newTab();
+        ActionBar actionbar = getSupportActionBar();
         //устанавливаем режим навигации
-        actionbar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+        actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         //first TAB item
-        Tab tabStore = actionbar.newTab();
+        ActionBar.Tab tabStore = actionbar.newTab();
         tabStore.setText(R.string.stores);
-        tabStore.setTabListener((android.app.ActionBar.TabListener) this);
+        tabStore.setTabListener(this);
         tabStore.setTag(Constans.TAG_STORES);
         actionbar.addTab(tabStore);
-        tabStore.setTabListener((android.app.ActionBar.TabListener) this);
+        tabStore.setTabListener(this);
 
         //second TAB item
-        Tab tabMap = actionbar.newTab();
+        ActionBar.Tab tabMap = actionbar.newTab();
         tabMap.setText(R.string.map);
-        tabMap.setTabListener((android.app.ActionBar.TabListener) this);
+        tabMap.setTabListener(this);
         tabMap.setTag(Constans.TAG_MAP);
         actionbar.addTab(tabMap);
-        tabMap.setTabListener((android.app.ActionBar.TabListener) this);
+        tabMap.setTabListener(this);
     }
 
     //выбранный таб
