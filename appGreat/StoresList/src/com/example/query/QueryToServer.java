@@ -25,6 +25,7 @@ public class QueryToServer {
     //ВЫЗОВ МЕТОДОВ, КОТОРЫЕ ПАРСИЛИ ОБЪЕКТ И МАССИВ
     public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, Context context, final int currentPage) {
                 String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+currentPage;
+                //Log.v(Constans.LOG_TAG, "Status_URL " +currentPage);
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
@@ -50,9 +51,13 @@ public class QueryToServer {
         try {
             JSONObject paginationJson = jsonObject.getJSONObject("pagination");
                     int total_page = paginationJson.getInt("total_page");
+            //Log.v(Constans.LOG_TAG, "Total pages: " +total_page);
                     int current_page = paginationJson.getInt("current_page");
+            //Log.v(Constans.LOG_TAG, "Current page: " +current_page);
                     int per_page = paginationJson.getInt("per_page");
+            //Log.v(Constans.LOG_TAG, "Per page: " +per_page);
             Pagination pagination = new Pagination(total_page, current_page, per_page);
+
             return pagination;
         } catch (JSONException e) {e.printStackTrace();
         }
@@ -68,8 +73,11 @@ public class QueryToServer {
             for(int i=0; i<productsJsonArray.length(); i++){
                 JSONObject jObj = productsJsonArray.getJSONObject(i);
                 int id = jObj.getInt("id");
+                //Log.v(Constans.LOG_TAG, "Product ID = " +id);
                 String title = jObj.getString("title");
+                //Log.v(Constans.LOG_TAG, "Product Title = " +title);
                 String description = jObj.getString("description");
+                //Log.v(Constans.LOG_TAG, "Product Description = " +description);
                 Product product = new Product(id, title, description);
                 listProduct.add(product);
             }

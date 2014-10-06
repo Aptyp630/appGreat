@@ -9,13 +9,14 @@ import android.widget.TextView;
 import com.example.R;
 import com.example.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ProductListAdapter extends BaseAdapter{
 
-    private Context context;
-    private List<Product> productList;
+    Context context;
+    private List<Product> productList = new ArrayList<Product>();
     private LayoutInflater inflater;
 
     public ProductListAdapter(Context context){
@@ -49,8 +50,8 @@ public class ProductListAdapter extends BaseAdapter{
 
         TextView textView = (TextView) view.findViewById(R.id.text_item);
         //textView.setText(String.valueOf(newProduct.getProductId()));
-        textView.setText(newProduct.getTitle());
-        //textView.setText(newProduct.getDescription());
+        //textView.setText(newProduct.getTitle());
+        textView.setText(newProduct.getDescription());
         return view;
     }
 }

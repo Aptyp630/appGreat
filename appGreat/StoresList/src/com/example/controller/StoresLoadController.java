@@ -6,13 +6,14 @@ import com.example.models.Product;
 import com.example.models.ProductResult;
 import com.example.query.QueryToServer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoresLoadController{
 
     private int page = 1;
     private ProductListAdapter adapter;
-    private List<Product> productList;
+    private List<Product> productList = new ArrayList<Product>();
 
     public StoresLoadController(ProductListAdapter adapter) {
         this.adapter = adapter;
