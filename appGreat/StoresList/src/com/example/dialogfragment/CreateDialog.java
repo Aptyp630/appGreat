@@ -20,17 +20,15 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
         Product product = (Product) this.getArguments().getSerializable(Constans.PRODUCT);
         String productTitle = product.getTitle();
         String productDescription = product.getDescription();
-        //int productID = this.getArguments().getInt("id");
-        //String productDescription = this.getArguments().getString("description");
 
         View view = layoutInflater.inflate(R.layout.dialog_fragment, null);
-        getDialog().setTitle("Product overview:");
+        getDialog().setTitle(getString(R.string.product_overview));
 
         TextView textId = (TextView) view.findViewById(R.id.productId);
         TextView textDesc = (TextView) view.findViewById(R.id.productDesc);
 
-        textId.setText("Product Title: " +productTitle);
-        textDesc.setText("Product Description: " +productDescription);
+        textId.setText(getString(R.string.product_title_dialog) +productTitle);
+        textDesc.setText(getString(R.string.product_description_dialog) +productDescription);
 
         Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);

@@ -7,4 +7,9 @@
     <string name="product_title">Product Title:</string>
     <string name="product_id">Product ID:</string>
     <string name="product_desc">Product Description:</string>
+    <string name="product_title_dialog">Product Title:</string>
+    <string name="product_description_dialog">Product Description:</string>
+    <string name="product_overview">Product overview:</string>
+    <string name="load">Loading</string>
+    <string name="loading_products">Loading products...</string>
 </resources>

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ProductListAdapter extends BaseAdapter{
 
-    Context context;
+    private Context context;
     private List<Product> productList = new ArrayList<Product>();
     private LayoutInflater inflater;
 
@@ -50,8 +50,12 @@ public class ProductListAdapter extends BaseAdapter{
 
         TextView textView = (TextView) view.findViewById(R.id.text_item);
         //textView.setText(String.valueOf(newProduct.getProductId()));
-        //textView.setText(newProduct.getTitle());
-        textView.setText(newProduct.getDescription());
+        textView.setText(newProduct.getTitle());
+        //textView.setText(newProduct.getDescription());
         return view;
+    }
+
+    public void addProducts(List<Product> productList) {
+        this.productList.addAll(productList);
     }
 }

@@ -1,7 +1,10 @@
 package com.example.controller;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import com.example.R;
 import com.example.adapter.ProductListAdapter;
+import com.example.constans.Constans;
 import com.example.models.Product;
 import com.example.models.ProductResult;
 import com.example.query.QueryToServer;
@@ -9,11 +12,12 @@ import com.example.query.QueryToServer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoresLoadController{
+public class StoresLoadController implements CharSequence{
 
     private int page = 1;
     private ProductListAdapter adapter;
     private List<Product> productList = new ArrayList<Product>();
+    private ProgressDialog dialog;
 
     public StoresLoadController(ProductListAdapter adapter) {
         this.adapter = adapter;
@@ -26,10 +30,40 @@ public class StoresLoadController{
                 productList.addAll(productResult.getProduct());
                 if(page <= productResult.getPagination().getTotalPage()) {
                     requestProducts(context);
+                    return;
                 }
+                dialog.dismiss();
+                initAdapter();
             }
-        };
+
+            //будет переопределен метод для генерации оишбки
+            //в этом методе я буду работать с базой данных
+
+         };
+        if(dialog == null)
+            dialog = ProgressDialog.show(context, , true);
+        dialog.show();
         QueryToServer.callGetProducts(listener, context, page);
         page++;
+    }
+
+    private void initAdapter() {
+        adapter.addProducts(productList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public int length() {
+        return 0;
+    }
+
+    @Override
+    public char charAt(int index) {
+        return 0;
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return null;
     }
 }

@@ -2,7 +2,6 @@ package com.example.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import com.example.adapter.ProductListAdapter;
@@ -17,7 +16,6 @@ public class StoreFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ProductListAdapter productListAdapter = new ProductListAdapter(this.getActivity());
-        Log.v(Constans.TAG_STORES, "Adapter " + productListAdapter);
         StoresLoadController storesLoadController = new StoresLoadController(productListAdapter);
         storesLoadController.requestProducts(getActivity());
         setListAdapter(productListAdapter);

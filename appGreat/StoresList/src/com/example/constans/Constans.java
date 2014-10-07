@@ -15,4 +15,7 @@ public class Constans {
     public static final String TAG_STORES = "stores";
     public static final String TAG_MAP = "layout_for_two_fragments";
 
+    //CONTROLLER
+    public static final CharSequence LOAD_TITLE = "Loading";
+    public static final CharSequence LOAD_PRODUCTS = "Loading products...";
 }
