@@ -36,14 +36,5 @@ public class StoreFragment extends ListFragment {
         bundle.putSerializable(Constans.PRODUCT, product);
         productDialog.setArguments(bundle);
     }
-
-    /*public void saveOrUpdateProductsInDB (){
-        DataBaseAdaptor dbAdaptor = new DataBaseAdaptor(getActivity());
-        dbAdaptor.openDB();
-
-        dbAdaptor.insertRow();
-
-        dbAdaptor.closeDB();
-    }*/
 }
 

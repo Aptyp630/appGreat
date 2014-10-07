@@ -17,7 +17,7 @@ public class ProductTable {
     public final static int COL_DESCRIPTION = 3;
     //############################################################################
 
-    public final static String DB_NAME = "db_name";
+    public final static String DB_NAME = "ProductsDB.db";
     public final static String TABLE_NAME = "products";
     public final static int DB_VERSION = 1;
     public final static String CREATE_DATABASE

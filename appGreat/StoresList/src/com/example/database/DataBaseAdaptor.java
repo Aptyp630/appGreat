@@ -41,12 +41,6 @@ public class DataBaseAdaptor{
         return sqLiteDatabase.insert(ProductTable.TABLE_NAME, null, contentValues);
     }
 
-    /*public Product getProduct(Product product){
-        Cursor cursor;
-        cursor = sqLiteDatabase.query(ProductTable.TABLE_NAME, )
-        return  null;
-    }*/
-
     //return all data in DB
     public Cursor returnData(){
         Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_PRODUCTS, null, null, null, null, null, null);
@@ -66,7 +60,7 @@ public class DataBaseAdaptor{
         return sqLiteDatabase.update(ProductTable.TABLE_NAME, contentValues, where, null) != 0;
     }
 
-    private static class DataBase extends SQLiteOpenHelper {
+    public static class DataBase extends SQLiteOpenHelper {
 
         public DataBase(Context context) {
             super(context, ProductTable.TABLE_NAME, null, ProductTable.DB_VERSION);
