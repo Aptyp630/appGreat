@@ -9,7 +9,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.constans.Constans;
-import com.example.database.DataBaseAdaptor;
 import com.example.models.Pagination;
 import com.example.models.Product;
 import com.example.models.ProductResult;
@@ -28,7 +27,7 @@ public class QueryToServer {
         String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+currentPage;
                 Log.v(Constans.LOG_TAG, "Status_URL " +currentPage);
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         Pagination pagination = parsePagination(jsonObject);
@@ -39,8 +38,7 @@ public class QueryToServer {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
-                        showProductListener.errorConnectInternet(dataBaseAdaptor);
+                        showProductListener.errorInternetConnection();
                     }
                 });
                 requestQueue.add(jsonObjectRequest);
@@ -93,7 +91,7 @@ public class QueryToServer {
     //СОЗДАНИЕ ИНТЕРФЕЙСА СЛУШАТЕЛЯ
     public interface OnResponseListener {
         public void onProductsReceived(ProductResult productResult);
-        public void errorConnectInternet(DataBaseAdaptor dataBaseAdaptor);
+        public void errorInternetConnection();
         //создать еще один метод, вызвать его в слушателе ошибки выше
     }
 }

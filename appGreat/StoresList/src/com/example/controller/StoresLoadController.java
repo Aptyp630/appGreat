@@ -2,10 +2,10 @@ package com.example.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import com.example.adapter.ProductListAdapter;
 import com.example.constans.Constans;
 import com.example.database.DataBaseAdaptor;
+import com.example.database.ProductTable;
 import com.example.models.Product;
 import com.example.models.ProductResult;
 import com.example.query.QueryToServer;
@@ -35,22 +35,25 @@ public class StoresLoadController{
                 }
                 dialog.dismiss();
                 initAdapter();
+                //Create DB
+                DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
+                dataBaseAdaptor.openDB();
+                Product p = (Product) productResult.getProduct();
+                    dataBaseAdaptor.updateProducts(ProductTable.PRODUCT_ID, Pro, p.getDescription());
+                dataBaseAdaptor.closeDB();
+                //#######################################################################
             }
 
             @Override
-            public void errorConnectInternet(DataBaseAdaptor dataBaseAdaptor) {
-                SQLiteDatabase sqLiteDatabase;
-                sqLiteDatabase.
+            public void errorInternetConnection() {
+                DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                DataBaseAdaptor.DataBase dataBase = new DataBaseAdaptor.DataBase(context);
-                dataBase.onCreate();
-
+                    dataBaseAdaptor.returnProductsFromDB();
+                initAdapter();
                 dataBaseAdaptor.closeDB();
             }
-            //будет переопределен метод для генерации оишбки
-            //в этом методе я буду работать с базой данных
-
          };
+
         if(dialog == null)
             dialog = ProgressDialog.show(context, Constans.LOAD_TITLE, Constans.LOAD_PRODUCTS);
         dialog.show();
