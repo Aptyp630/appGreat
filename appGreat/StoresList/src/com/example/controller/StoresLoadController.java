@@ -5,7 +5,6 @@ import android.content.Context;
 import com.example.adapter.ProductListAdapter;
 import com.example.constans.Constans;
 import com.example.database.DataBaseAdaptor;
-import com.example.database.ProductTable;
 import com.example.models.Product;
 import com.example.models.ProductResult;
 import com.example.query.QueryToServer;
@@ -17,7 +16,7 @@ public class StoresLoadController{
 
     private int page = 1;
     private ProductListAdapter adapter;
-    private List<Product> productList = new ArrayList<Product>();
+    private List<Product> productList = new ArrayList <Product>();
     private ProgressDialog dialog;
 
     public StoresLoadController(ProductListAdapter adapter) {
@@ -38,18 +37,16 @@ public class StoresLoadController{
                 //Create DB
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                Product p = (Product) productResult.getProduct();
-                    dataBaseAdaptor.updateProducts(ProductTable.PRODUCT_ID, Pro, p.getDescription());
                 dataBaseAdaptor.closeDB();
+
                 //#######################################################################
             }
 
             @Override
-            public void errorInternetConnection() {
+            public void errorInternetConnection(){
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
                     dataBaseAdaptor.returnProductsFromDB();
-                initAdapter();
                 dataBaseAdaptor.closeDB();
             }
          };

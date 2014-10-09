@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.constans.Constans;
+import com.example.models.Product;
 
 //create DataBaseAdaptor
 public class DataBaseAdaptor{
@@ -32,19 +33,20 @@ public class DataBaseAdaptor{
     }
 
     //setData in DB
-    /*public long saveOrUpdate(Product product) {
+    public long saveOrUpdate(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
-        return sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
-    }*/
+        long rowID = sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
+        return rowID;
+    }
 
-    public int updateProducts(int id, String title, String description) {
+    public int updateProducts(String productTitle) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ProductTable.PRODUCT_ID, id);
-        contentValues.put(ProductTable.PRODUCT_TITLE, title);
-        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, description);
+        //contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
+        contentValues.put(ProductTable.PRODUCT_TITLE, productTitle);
+        //contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         return sqLiteDatabase.update(ProductTable.DB_NAME, contentValues, null, null);
     }
 
@@ -57,16 +59,6 @@ public class DataBaseAdaptor{
         return cursor;
     }
 
-    //upDate Rows
-   /*public boolean updateRows(long rowID, int productId, String productTitle, String productDescription){
-        ContentValues contentValues = new ContentValues();
-        String where = ProductTable.UID + "=" + rowID;
-        contentValues.put(String.valueOf(ProductTable.PRODUCT_ID), productId);
-        contentValues.put(ProductTable.PRODUCT_TITLE, productTitle);
-        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, productDescription);
-        return sqLiteDatabase.update(ProductTable.DB_NAME, contentValues, where, null) != 0;
-    }*/
-
     public static class DataBase extends SQLiteOpenHelper {
 
         public DataBase(Context context) {
@@ -77,7 +69,6 @@ public class DataBaseAdaptor{
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(ProductTable.CREATE_TABLE);
             Log.v(Constans.LOG_TAG, "Data_Base allReady Created");
-            Log.v("www", "Data_Base allReady Created");
         }
 
         @Override
