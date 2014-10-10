@@ -1,13 +1,13 @@
-package com.example.storeslist;
+package com.davidofffarchik.main;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import com.example.R;
-import com.example.constans.Constans;
-import com.example.fragments.MapFragment;
-import com.example.fragments.StoreFragment;
+import com.davidofffarchik.R;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.fragments.MapFragment;
+import com.davidofffarchik.fragments.StoreFragment;
 
 public class Main extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -15,7 +15,6 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        //возвращает объект actionbar в этом Activity
         ActionBar actionbar = getSupportActionBar();
         //устанавливаем режим навигации
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -42,10 +41,10 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         if(Constans.TAG_STORES.equals(tab.getTag())){
             StoreFragment storeList = new StoreFragment();
-            ft.replace(R.id.fragments_view_two, storeList, Constans.TAG_STORES);
+            ft.replace(R.id.fragments_view_two, storeList);
         }else{
             MapFragment storeMap = new MapFragment();
-            ft.replace(R.id.fragments_view_two, storeMap, Constans.TAG_MAP);
+            ft.replace(R.id.fragments_view_two, storeMap);
         }
     }
 

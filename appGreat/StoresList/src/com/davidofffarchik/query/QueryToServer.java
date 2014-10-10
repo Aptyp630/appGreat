@@ -1,17 +1,17 @@
-package com.example.query;
+package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.models.Pagination;
+import com.davidofffarchik.models.Product;
+import com.davidofffarchik.models.ProductResult;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.constans.Constans;
-import com.example.models.Pagination;
-import com.example.models.Product;
-import com.example.models.ProductResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,11 +51,8 @@ public class QueryToServer {
         try {
             JSONObject paginationJson = jsonObject.getJSONObject("pagination");
                     int total_page = paginationJson.getInt("total_page");
-            Log.v(Constans.LOG_TAG, "Total pages: " +total_page);
                     int current_page = paginationJson.getInt("current_page");
-            Log.v(Constans.LOG_TAG, "Current page: " +current_page);
                     int per_page = paginationJson.getInt("per_page");
-            Log.v(Constans.LOG_TAG, "Per page: " +per_page);
             Pagination pagination = new Pagination(total_page, current_page, per_page);
 
             return pagination;
@@ -73,11 +70,8 @@ public class QueryToServer {
             for(int i=0; i<productsJsonArray.length(); i++){
                 JSONObject jObj = productsJsonArray.getJSONObject(i);
                 int id = jObj.getInt("id");
-                Log.v(Constans.LOG_TAG, "Product ID = " +id);
                 String title = jObj.getString("title");
-                Log.v(Constans.LOG_TAG, "Product Title = " +title);
                 String description = jObj.getString("description");
-                Log.v(Constans.LOG_TAG, "Product Description = " +description);
                 Product product = new Product(id, title, description);
                 listProduct.add(product);
             }

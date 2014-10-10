@@ -1,4 +1,4 @@
-package com.example.constans;
+package com.davidofffarchik.constans;
 
 public class Constans {
 

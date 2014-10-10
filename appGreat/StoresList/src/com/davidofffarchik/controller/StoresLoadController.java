@@ -1,13 +1,13 @@
-package com.example.controller;
+package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import com.example.adapter.ProductListAdapter;
-import com.example.constans.Constans;
-import com.example.database.DataBaseAdaptor;
-import com.example.models.Product;
-import com.example.models.ProductResult;
-import com.example.query.QueryToServer;
+import com.davidofffarchik.adapter.ProductListAdapter;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.database.DataBaseAdaptor;
+import com.davidofffarchik.models.Product;
+import com.davidofffarchik.models.ProductResult;
+import com.davidofffarchik.query.QueryToServer;
 
 import java.util.ArrayList;
 import java.util.List;

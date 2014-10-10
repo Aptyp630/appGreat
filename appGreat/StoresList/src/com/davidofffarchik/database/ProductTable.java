@@ -1,4 +1,4 @@
-package com.example.database;
+package com.davidofffarchik.database;
 
 public class ProductTable {
 

@@ -1,14 +1,14 @@
-package com.example.fragments;
+package com.davidofffarchik.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
-import com.example.adapter.ProductListAdapter;
-import com.example.constans.Constans;
-import com.example.controller.StoresLoadController;
-import com.example.dialogfragment.CreateDialog;
-import com.example.models.Product;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.models.Product;
+import com.davidofffarchik.adapter.ProductListAdapter;
+import com.davidofffarchik.controller.StoresLoadController;
+import com.davidofffarchik.dialogfragment.CreateDialog;
 
 public class StoreFragment extends ListFragment {
 

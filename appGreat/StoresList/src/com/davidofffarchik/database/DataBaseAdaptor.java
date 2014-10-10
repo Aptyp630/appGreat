@@ -1,4 +1,4 @@
-package com.example.database;
+package com.davidofffarchik.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.example.constans.Constans;
-import com.example.models.Product;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.models.Product;
 
 //create DataBaseAdaptor
 public class DataBaseAdaptor{

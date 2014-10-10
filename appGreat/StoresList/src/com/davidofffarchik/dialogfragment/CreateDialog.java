@@ -1,17 +1,16 @@
-package com.example.dialogfragment;
+package com.davidofffarchik.dialogfragment;
 
-import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.R;
-import com.example.constans.Constans;
-import com.example.models.Product;
+import com.davidofffarchik.R;
+import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.models.Product;
 
 public class CreateDialog extends DialogFragment implements View.OnClickListener{
 
@@ -41,7 +40,6 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
             case R.id.btnCancel : dismiss();
                 break;
         }
-        Log.v(Constans.LOG_TAG, "Dialog Dismissed");
     }
 
     public void onDismiss(DialogInterface dialog){

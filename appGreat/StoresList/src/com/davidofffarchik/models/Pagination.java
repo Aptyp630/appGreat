@@ -1,4 +1,4 @@
-package com.example.models;
+package com.davidofffarchik.models;
 
 public class Pagination {
 
