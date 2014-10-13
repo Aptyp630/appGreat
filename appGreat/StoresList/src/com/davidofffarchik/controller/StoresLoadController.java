@@ -46,7 +46,7 @@ public class StoresLoadController{
             public void errorInternetConnection(){
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                    dataBaseAdaptor.returnProductsFromDB();
+                   // dataBaseAdaptor.returnProductsFromDB();
                 dataBaseAdaptor.closeDB();
             }
          };

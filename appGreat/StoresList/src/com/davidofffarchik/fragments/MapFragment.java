@@ -2,33 +2,22 @@ package com.davidofffarchik.fragments;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.davidofffarchik.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends SupportMapFragment {
 
-
-
-   // static final LatLng NKUT = new LatLng(23.979548, 120.696745);
-   private GoogleMap map;
-   private SupportMapFragment mMapFragment;
-
+    GoogleMap googleMap;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.map, container, false);
-        map = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        mMapFragment.getMap();
-        return view;
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        googleMap = getMap();
+        //googleMap.addMarker(new MarkerOptions().position(new LatLng(90, 30)).title("Android").snippet("Hello World"));
     }
 
-/*
+
+    /*
 
     private String data[] = { "There must be Map" };
 
