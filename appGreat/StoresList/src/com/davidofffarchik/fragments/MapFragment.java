@@ -4,6 +4,8 @@ package com.davidofffarchik.fragments;
 import android.os.Bundle;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends SupportMapFragment {
 
@@ -13,7 +15,7 @@ public class MapFragment extends SupportMapFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         googleMap = getMap();
-        //googleMap.addMarker(new MarkerOptions().position(new LatLng(90, 30)).title("Android").snippet("Hello World"));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(90, 30)).title("Android").snippet("Hello World"));
     }
 
 

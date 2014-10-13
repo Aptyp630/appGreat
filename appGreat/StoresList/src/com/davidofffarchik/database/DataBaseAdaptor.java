@@ -32,6 +32,21 @@ public class DataBaseAdaptor{
         dataBase.close();
     }
 
+
+    public void addProducts(Product product){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
+        contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
+        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
+        sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
+    }
+
+    /*public List<Product> getAllContacts(){
+        String seleqtQuery = "SELECT * FROM "  +ProductTable.
+        return null;
+    }
+*/
+
     //setData in DB
     public long saveOrUpdate(Product product) {
         ContentValues contentValues = new ContentValues();
@@ -42,11 +57,11 @@ public class DataBaseAdaptor{
         return rowID;
     }
 
-    public int updateProducts(String productTitle) {
+    public int updateProducts(Product product) {
         ContentValues contentValues = new ContentValues();
-        //contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
-        contentValues.put(ProductTable.PRODUCT_TITLE, productTitle);
-        //contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
+        contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
+        contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
+        contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         return sqLiteDatabase.update(ProductTable.DB_NAME, contentValues, null, null);
     }
 
@@ -73,7 +88,7 @@ public class DataBaseAdaptor{
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + ProductTable.DB_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + ProductTable.TABLE_NAME);
             onCreate(db);
             Log.v(Constans.LOG_TAG, "Data_Base allReady upGraded");
         }

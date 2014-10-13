@@ -2,6 +2,7 @@ package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
@@ -33,10 +34,14 @@ public class StoresLoadController{
                     return;
                 }
                 dialog.dismiss();
+                Log.e("ADD", "data added");
                 initAdapter();
+
                 //Create DB
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
+                    dataBaseAdaptor.addProducts(productResult.getProduct().get(new ProductListAdapter(context).getCount()));
+
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################

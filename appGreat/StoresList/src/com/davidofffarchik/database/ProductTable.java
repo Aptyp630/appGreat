@@ -17,10 +17,11 @@ public class ProductTable {
     public final static int COL_DESCRIPTION = 3;
     //############################################################################
 
-    public final static String DB_NAME = "ProductsDB";
+    public final static String DB_NAME = "products";
+    public final static String TABLE_NAME = "product_table";
     public final static int DB_VERSION = 1;
     public final static String CREATE_TABLE
-            = "CREATE TABLE " + DB_NAME
+            = "CREATE TABLE " + TABLE_NAME
             + "("
             + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PRODUCT_ID + "INTEGER, "
