@@ -45,17 +45,33 @@ public class DataBaseAdaptor{
         return product;
     }
 
+    public void saveProducts(List<Product> productList){
+        for(Product product : productList){
 
-   public void addProducts(Product product){
+        }
+    }
+
+    private Product getProductByID(int id){
+        String where = ProductTable.PRODUCT_ID + "=" +id;
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, where, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            String title = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_TITLE));
+            String description = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_DESCRIPTION));
+            return new Product(id, title, description);
+        }
+        return null;
+    }
+
+
+   public void addProduct(Product product){
            ContentValues contentValues = new ContentValues();
            contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
            contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
            contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
            sqLiteDatabase.insert(ProductTable.TABLE_NAME, null, contentValues);
-       Log.v("Products Added", "Adding sucsessfull");
-    }
+   }
 
-    public void updateProducts(Product product){
+    public void updateProduct(Product product){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
@@ -63,10 +79,10 @@ public class DataBaseAdaptor{
         sqLiteDatabase.update(ProductTable.TABLE_NAME, contentValues, null, null);
     }
 
-    public List<Product> getAllContacts(){
+    public List<Product> getAllProducts(){
         List<Product> products = new ArrayList<Product>();
         //String selectQuery = "SELECT * FROM "  +ProductTable.TABLE_NAME;
-        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_PRODUCTS, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null, null);
         if(cursor.moveToFirst()){
             do {
                 for(Product title : products){
@@ -98,7 +114,7 @@ public class DataBaseAdaptor{
 
     //return all data in DB
     public Cursor returnProductsFromDB(){
-        Cursor cursor = sqLiteDatabase.query(true, ProductTable.DB_NAME, ProductTable.ALL_PRODUCTS, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.DB_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null, null);
         if(cursor != null){
             cursor.moveToFirst();
         }

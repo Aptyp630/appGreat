@@ -39,12 +39,12 @@ public class StoresLoadController{
                 //Create DB
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                int productId = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getProductId();
-                String productTitle = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getTitle();
-                String productDescription = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getDescription();
-                Product product = new Product(productId, productTitle, productDescription);
-                dataBaseAdaptor.addProducts(productList.get(new ProductListAdapter(context).getCount()));
-                dataBaseAdaptor.updateProducts(productList.get(new ProductListAdapter(context).getCount()));
+                //int productId = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getProductId();
+                //String productTitle = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getTitle();
+                //String productDescription = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getDescription();
+                //Product product = new Product(productId, productTitle, productDescription);
+                //dataBaseAdaptor.addProducts(productList.get(new ProductListAdapter(context).getCount()));
+               //dataBaseAdaptor.updateProducts(productList.get(new ProductListAdapter(context).getCount()));
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################
@@ -54,7 +54,7 @@ public class StoresLoadController{
             public void errorInternetConnection(){
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                dataBaseAdaptor.updateProducts(productList.get(new ProductListAdapter(context).getCount()));
+                //dataBaseAdaptor.updateProducts(productList.get(new ProductListAdapter(context).getCount()));
                 Log.e("ADD_Products", "get data");
                 dataBaseAdaptor.closeDB();
             }
