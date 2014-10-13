@@ -9,6 +9,9 @@ import android.util.Log;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.models.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //create DataBaseAdaptor
 public class DataBaseAdaptor{
 
@@ -32,38 +35,66 @@ public class DataBaseAdaptor{
         dataBase.close();
     }
 
+    public Product readOneProduct(String title){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ProductTable.PRODUCT_TITLE, title);
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, new String[]{String.valueOf(contentValues)}, null, null, null, null, null, null);
+        if(cursor != null)
+            cursor.moveToFirst();
+        Product product = new Product(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+        return product;
+    }
 
-    public void addProducts(Product product){
+
+   public void addProducts(Product product){
+           ContentValues contentValues = new ContentValues();
+           contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
+           contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
+           contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
+           sqLiteDatabase.insert(ProductTable.TABLE_NAME, null, contentValues);
+       Log.v("Products Added", "Adding sucsessfull");
+    }
+
+    public void updateProducts(Product product){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
-        sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
+        sqLiteDatabase.update(ProductTable.TABLE_NAME, contentValues, null, null);
     }
 
-    /*public List<Product> getAllContacts(){
-        String seleqtQuery = "SELECT * FROM "  +ProductTable.
-        return null;
+    public List<Product> getAllContacts(){
+        List<Product> products = new ArrayList<Product>();
+        //String selectQuery = "SELECT * FROM "  +ProductTable.TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_PRODUCTS, null, null, null, null, null, null);
+        if(cursor.moveToFirst()){
+            do {
+                for(Product title : products){
+                    products.add(title);
+                }
+            }while(cursor.moveToNext());
+        }
+        return products;
     }
-*/
+
 
     //setData in DB
-    public long saveOrUpdate(Product product) {
+   /* public long saveOrUpdate(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         long rowID = sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
         return rowID;
-    }
+    }*/
 
-    public int updateProducts(Product product) {
+  /*  public int updateProducts(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         return sqLiteDatabase.update(ProductTable.DB_NAME, contentValues, null, null);
-    }
+    }*/
 
     //return all data in DB
     public Cursor returnProductsFromDB(){

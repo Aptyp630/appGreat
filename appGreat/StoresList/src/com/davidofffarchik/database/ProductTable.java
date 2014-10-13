@@ -8,7 +8,7 @@ public class ProductTable {
     public final static String PRODUCT_ID = "product_id";
     public final static String PRODUCT_TITLE = "product_title";
     public final static String PRODUCT_DESCRIPTION = "product_description";
-    public final static String[] ALL_PRODUCTS = new String[] {PRODUCT_ID, PRODUCT_TITLE, PRODUCT_DESCRIPTION};
+    public final static String[] ALL_PRODUCTS = new String[] {UID, PRODUCT_ID, PRODUCT_TITLE, PRODUCT_DESCRIPTION};
     //############################################################################
 
     //DataBase Columns
