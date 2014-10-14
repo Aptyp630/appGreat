@@ -24,6 +24,16 @@ public class DataBaseAdaptor{
         dataBase = new DataBase(context);
     }
 
+    public void getColumnNames(Product product){
+        addProduct(product);
+        Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null, null);
+        String uid = cursor.getColumnName(0);
+        String id = cursor.getColumnName(1);
+        String title = cursor.getColumnName(2);
+        String description = cursor.getColumnName(3);
+        Log.v("Names", "uid =" +uid+ "id " +id+ "title " +title+ "description " +description);
+    }
+
     //open DataBase
     public DataBaseAdaptor openDB(){
         sqLiteDatabase = dataBase.getWritableDatabase();
@@ -47,24 +57,26 @@ public class DataBaseAdaptor{
 
     public void saveProducts(List<Product> productList){
         for(Product product : productList){
-            if(getProductByID(product.getProductId()) == null)
-            addProduct(product);
-            else
+            if(getProductByID(product.getProductId()) == null) {
+                addProduct(product);
+                Log.v(Constans.LOG_TAG, "added products");
+            }else
             updateProduct(product);
         }
     }
 
     private Product getProductByID(int id){
         String where = ProductTable.PRODUCT_ID + "=" + id;
+        Log.v("where", "WHERE");
         Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, where, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             String title = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_TITLE));
             String description = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_DESCRIPTION));
+            cursor.close();
             return new Product(id, title, description);
         }
         return null;
     }
-
 
    public void addProduct(Product product){
            ContentValues contentValues = new ContentValues();
@@ -98,22 +110,22 @@ public class DataBaseAdaptor{
 
 
     //setData in DB
-   /* public long saveOrUpdate(Product product) {
+   public long saveOrUpdate(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         long rowID = sqLiteDatabase.insert(ProductTable.DB_NAME, null, contentValues);
         return rowID;
-    }*/
+    }
 
-  /*  public int updateProducts(Product product) {
+  public int updateProducts(Product product) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         return sqLiteDatabase.update(ProductTable.DB_NAME, contentValues, null, null);
-    }*/
+    }
 
     //return all data in DB
     public Cursor returnProductsFromDB(){
@@ -133,7 +145,7 @@ public class DataBaseAdaptor{
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(ProductTable.CREATE_TABLE);
-            Log.v(Constans.LOG_TAG, "Data_Base allReady Created");
+            Log.v(Constans.LOG_TAG, "Data_Base Created");
         }
 
         @Override
