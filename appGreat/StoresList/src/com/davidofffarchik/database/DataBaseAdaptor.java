@@ -47,12 +47,15 @@ public class DataBaseAdaptor{
 
     public void saveProducts(List<Product> productList){
         for(Product product : productList){
-
+            if(getProductByID(product.getProductId()) == null)
+            addProduct(product);
+            else
+            updateProduct(product);
         }
     }
 
     private Product getProductByID(int id){
-        String where = ProductTable.PRODUCT_ID + "=" +id;
+        String where = ProductTable.PRODUCT_ID + "=" + id;
         Cursor cursor = sqLiteDatabase.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, where, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             String title = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_TITLE));

@@ -39,6 +39,8 @@ public class StoresLoadController{
                 //Create DB
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
+                dataBaseAdaptor.saveProducts(productList);
+                Log.v("adde", "added files");
                 //int productId = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getProductId();
                 //String productTitle = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getTitle();
                 //String productDescription = productResult.getProduct().get(new ProductListAdapter(context).getCount()).getDescription();
@@ -53,8 +55,7 @@ public class StoresLoadController{
             @Override
             public void errorInternetConnection(){
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
-                dataBaseAdaptor.openDB();
-                //dataBaseAdaptor.updateProducts(productList.get(new ProductListAdapter(context).getCount()));
+                dataBaseAdaptor.openDB();dataBaseAdaptor.getAllProducts();
                 Log.e("ADD_Products", "get data");
                 dataBaseAdaptor.closeDB();
             }
