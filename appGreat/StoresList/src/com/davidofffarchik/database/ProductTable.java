@@ -12,6 +12,7 @@ public class ProductTable {
     //############################################################################
 
     //DataBase Columns
+    public final static int COL_UID = 0;
     public final static int COL_ID = 1;
     public final static int COL_TITLE = 2;
     public final static int COL_DESCRIPTION = 3;
@@ -20,14 +21,11 @@ public class ProductTable {
     public final static String DB_NAME = "products";
     public final static String TABLE_NAME = "product_table";
     public final static int DB_VERSION = 1;
-    public final static String CREATE_TABLE
-            = "CREATE TABLE " + TABLE_NAME
-            + "("
+    public final static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
             + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + PRODUCT_ID + "INTEGER, "
+            + PRODUCT_ID + " INTEGER, "
             + PRODUCT_TITLE + " TEXT, "
-            + PRODUCT_DESCRIPTION + " TEXT "
-            + ")";
+            + PRODUCT_DESCRIPTION + " TEXT " + ")";
     //############################################################################
 
 }

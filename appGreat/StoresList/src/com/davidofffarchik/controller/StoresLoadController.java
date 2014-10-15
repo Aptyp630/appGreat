@@ -2,6 +2,7 @@ package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
@@ -36,9 +37,14 @@ public class StoresLoadController{
                 initAdapter();
 
                 //Create DB
+                /*context.deleteDatabase(ProductTable.DB_NAME);
+                Log.v(Constans.LOG_TAG, "Deleted " +ProductTable.DB_NAME);*/
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                dataBaseAdaptor.getColumnNames(adapter.getItem(5));
+                String mas[] = dataBaseAdaptor.getColumnNames();
+                Log.v(Constans.LOG_TAG, "Column names = " + mas[0] + " Column names = " + mas[1] + " Column names = " + mas[2] + " Column names = " + mas[3]);
+                int items = dataBaseAdaptor.columnItems();
+                Log.v(Constans.LOG_TAG, "Column items = " + items);
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################
@@ -46,10 +52,9 @@ public class StoresLoadController{
 
             @Override
             public void errorInternetConnection(){
-                /*DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
+                DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                dataBaseAdaptor.getColumnNames();
-                dataBaseAdaptor.closeDB();*/
+                dataBaseAdaptor.closeDB();
             }
          };
 
