@@ -1,11 +1,15 @@
 package com.davidofffarchik.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.models.Product;
+
+import java.util.List;
 
 //create DataBaseAdaptor
 public class DataBaseAdaptor{
@@ -31,15 +35,15 @@ public class DataBaseAdaptor{
     }
 
     public int columnItems(){
-        Cursor cursor = sq.query(ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null);
-        return cursor.getCount();
+        Cursor cursor = sq.query(ProductTable.TABLE_NAME, null, null, null, null, null, null);
+        return cursor.getColumnCount();
     }
 
     public String[] getColumnNames(){
         Cursor cursor = sq.query(ProductTable.TABLE_NAME, null, null, null, null, null, null);
         return cursor.getColumnNames();
     }
-/*
+
     public Product readOneProduct(String title){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ProductTable.PRODUCT_TITLE, title);
@@ -87,12 +91,13 @@ public class DataBaseAdaptor{
 
     private void updateProduct(Product product){
         ContentValues contentValues = new ContentValues();
+        //String where = ProductTable.PRODUCT_ID + "=" +
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
         sq.update(ProductTable.TABLE_NAME, contentValues, null, null);
     }
-
+/*
     public List<Product> getAllProducts(){
         List<Product> products = new ArrayList<Product>();
         //String selectQuery = "SELECT * FROM "  +ProductTable.TABLE_NAME;

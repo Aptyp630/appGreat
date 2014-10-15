@@ -45,6 +45,8 @@ public class StoresLoadController{
                 Log.v(Constans.LOG_TAG, "Column names = " + mas[0] + " Column names = " + mas[1] + " Column names = " + mas[2] + " Column names = " + mas[3]);
                 int items = dataBaseAdaptor.columnItems();
                 Log.v(Constans.LOG_TAG, "Column items = " + items);
+                dataBaseAdaptor.saveProducts(productList);
+                Log.v(Constans.LOG_TAG, "saved db");
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################
@@ -54,6 +56,7 @@ public class StoresLoadController{
             public void errorInternetConnection(){
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
+                adapter.addProducts(productList);
                 dataBaseAdaptor.closeDB();
             }
          };
