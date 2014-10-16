@@ -83,6 +83,5 @@ public class QueryToServer {
     public interface OnResponseListener {
         public void onProductsReceived(ProductResult productResult);
         public void errorInternetConnection();
-        //создать еще один метод, вызвать его в слушателе ошибки выше
     }
 }

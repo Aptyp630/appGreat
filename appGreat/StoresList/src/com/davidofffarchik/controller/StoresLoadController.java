@@ -43,10 +43,12 @@ public class StoresLoadController{
                 dataBaseAdaptor.openDB();
                 String mas[] = dataBaseAdaptor.getColumnNames();
                 Log.v(Constans.LOG_TAG, "Column names = " + mas[0] + " Column names = " + mas[1] + " Column names = " + mas[2] + " Column names = " + mas[3]);
-                int items = dataBaseAdaptor.columnItems();
+                int items = dataBaseAdaptor.getColumnsCount();
                 Log.v(Constans.LOG_TAG, "Column items = " + items);
                 dataBaseAdaptor.saveProducts(productList);
                 Log.v(Constans.LOG_TAG, "saved db");
+                int rowItems = dataBaseAdaptor.getRowsCounts();
+                Log.v(Constans.LOG_TAG, "Rows items = " + rowItems);
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################
@@ -54,9 +56,12 @@ public class StoresLoadController{
 
             @Override
             public void errorInternetConnection(){
+                dialog.dismiss();
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
+                productList = dataBaseAdaptor.getProductTitle();
                 adapter.addProducts(productList);
+                adapter.notifyDataSetChanged();
                 dataBaseAdaptor.closeDB();
             }
          };
