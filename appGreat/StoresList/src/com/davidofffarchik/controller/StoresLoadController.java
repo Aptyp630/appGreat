@@ -2,7 +2,6 @@ package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
@@ -37,18 +36,9 @@ public class StoresLoadController{
                 initAdapter();
 
                 //Create DB
-                /*context.deleteDatabase(ProductTable.DB_NAME);
-                Log.v(Constans.LOG_TAG, "Deleted " +ProductTable.DB_NAME);*/
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                String mas[] = dataBaseAdaptor.getColumnNames();
-                Log.v(Constans.LOG_TAG, "Column names = " + mas[0] + " Column names = " + mas[1] + " Column names = " + mas[2] + " Column names = " + mas[3]);
-                int items = dataBaseAdaptor.getColumnsCount();
-                Log.v(Constans.LOG_TAG, "Column items = " + items);
                 dataBaseAdaptor.saveProducts(productList);
-                Log.v(Constans.LOG_TAG, "saved db");
-                int rowItems = dataBaseAdaptor.getRowsCounts();
-                Log.v(Constans.LOG_TAG, "Rows items = " + rowItems);
                 dataBaseAdaptor.closeDB();
 
                 //#######################################################################

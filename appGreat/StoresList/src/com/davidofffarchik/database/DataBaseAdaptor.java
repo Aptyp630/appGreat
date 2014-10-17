@@ -106,19 +106,6 @@ public class DataBaseAdaptor{
         return productList;
     }
 
-/*
-
-
-
-    //return all data in DB
-    public Cursor returnProductsFromDB(){
-        Cursor cursor = sq.query(true, ProductTable.DB_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null, null);
-        if(cursor != null){
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
-*/
     public static class DataBase extends SQLiteOpenHelper {
 
         public DataBase(Context context) {

@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import com.davidofffarchik.R;
 import com.davidofffarchik.constans.Constans;
-import com.davidofffarchik.fragments.AddShop;
 import com.davidofffarchik.fragments.MapFragment;
 import com.davidofffarchik.fragments.StoreFragment;
 
@@ -18,7 +17,7 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         setContentView(R.layout.main);
         ActionBar actionbar = getSupportActionBar();
         //устанавливаем режим навигации
-        actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         //first TAB item
         ActionBar.Tab tabStore = actionbar.newTab();
@@ -35,13 +34,6 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         tabMap.setTag(Constans.TAG_MAP);
         actionbar.addTab(tabMap);
         tabMap.setTabListener(this);
-
-        ActionBar.Tab tabShop = actionbar.newTab();
-        tabMap.setText(R.string.shop);
-        tabMap.setTabListener(this);
-        tabMap.setTag(Constans.TAG_SHOP);
-        actionbar.addTab(tabShop);
-        tabShop.setTabListener(this);
     }
 
     //выбранный таб
@@ -49,13 +41,10 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         if(Constans.TAG_STORES.equals(tab.getTag())){
             StoreFragment storeList = new StoreFragment();
-            ft.replace(R.id.fragments_view_two, storeList);
-        }else if (Constans.TAG_MAP.equals(tab.getTag())){
-            MapFragment storeMap = new MapFragment();
-            ft.replace(R.id.fragments_view_two, storeMap);
+            ft.replace(R.id.fragments_view_two, storeList, Constans.TAG_STORES);
         }else{
-            AddShop addShop = new AddShop();
-            ft.replace(R.id.fragments_view_two, addShop);
+            MapFragment storeMap = new MapFragment();
+            ft.replace(R.id.fragments_view_two, storeMap, Constans.TAG_MAP);
         }
     }
 

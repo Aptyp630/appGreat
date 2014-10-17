@@ -50,9 +50,7 @@ public class QueryToServer {
                     int total_page = paginationJson.getInt("total_page");
                     int current_page = paginationJson.getInt("current_page");
                     int per_page = paginationJson.getInt("per_page");
-            Pagination pagination = new Pagination(total_page, current_page, per_page);
-
-            return pagination;
+            return new Pagination(total_page, current_page, per_page);
         } catch (JSONException e) {e.printStackTrace();
         }
         return null;

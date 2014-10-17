@@ -3,7 +3,6 @@
     <string name="app_name">StoresList</string>
     <string name="stores">Stores</string>
     <string name="map">Map</string>
-    <string name="shop">Add Shop</string>
     <string name="cancel">Cancel</string>
     <string name="product_title">Product Title:</string>
     <string name="product_id">Product ID:</string>
@@ -12,5 +11,4 @@
     <string name="product_description_dialog">Product Description:</string>
     <string name="product_overview">Product overview:</string>
     <string name="load">Loading</string>
-    <string name="loading_products">Loading products...</string>
 </resources>
