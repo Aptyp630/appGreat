@@ -20,6 +20,7 @@
     <string name="registerPassword">Password</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="entering">OK</string>
     <string name="registerForm">Registration Form</string>
     <string name="signInBtn">SIGN UP</string>
     <string name="loginBtn">LOGIN</string>

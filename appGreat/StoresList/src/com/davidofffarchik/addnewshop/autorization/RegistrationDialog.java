@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 
-public class AutorizationDialigFragment extends DialogFragment implements View.OnClickListener{
+public class RegistrationDialog extends DialogFragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,7 +25,9 @@ public class AutorizationDialigFragment extends DialogFragment implements View.O
         EditText password = (EditText) view.findViewById(R.id.password_edit);
         EditText confirmPassword = (EditText) view.findViewById(R.id.password_confirm);
         Button registerBtn = (Button) view.findViewById(R.id.registerBtn);
-
+        Button cancelBtn = (Button) view.findViewById(R.id.cancelBtn);
+        registerBtn.setOnClickListener(this);
+        cancelBtn.setOnClickListener(this);
         return view;
     }
 
@@ -33,6 +36,11 @@ public class AutorizationDialigFragment extends DialogFragment implements View.O
         switch (v.getId()){
             case R.id.registerBtn :
                 Toast.makeText(getActivity(), "Registered", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.cancelBtn :
+                this.dismiss();
+                Log.v("dismiss", "dismissed");
+                break;
         }
     }
 
