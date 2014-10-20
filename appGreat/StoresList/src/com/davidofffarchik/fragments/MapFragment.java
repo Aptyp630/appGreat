@@ -26,20 +26,21 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
     }
 
     public void addMarkers() {
-        List<Product> productList = returnList();
+        List<Product> productList = getProductsFromDB();
         map.setOnInfoWindowClickListener(this);
-            for (int i = 0; i < productList.size(); i++) {
-                double latitude = (double) Math.round(Math.random()*(-50));
-                double longitude = (double) Math.round(Math.random()*50);
-                map.addMarker(new MarkerOptions()
-                        .position(new LatLng(latitude, longitude))
-                        .title(productList.get(i).getTitle())
-                        .snippet(productList.get(i).getDescription())
-                        .draggable(true));
-            }
+        for (int i = 0; i < productList.size(); i++) {
+            //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
+            //double latitude = (double) Math.round(Math.random()*(-50));
+            //double longitude = (double) Math.round(Math.random()*50);
+            map.addMarker(new MarkerOptions()
+                    .position(new LatLng(productList.get(i).getLatitude(), productList.get(i).getLongitude()))
+                    .title(productList.get(i).getTitle())
+                    .snippet(productList.get(i).getDescription())
+                    .draggable(true));
+        }
     }
 
-    private List<Product> returnList(){
+    private List<Product> getProductsFromDB(){
         DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(getActivity());
         dataBaseAdaptor.openDB();
         List<Product> productList = dataBaseAdaptor.getProductTitle();
@@ -51,9 +52,16 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
     public void onInfoWindowClick(Marker marker) {
             CreateDialog createDialog = new CreateDialog();
             createDialog.show(getFragmentManager(), Constans.FRG_LOG);
-            List<Product> productList = returnList();
+            List<Product> productList = getProductsFromDB();
+        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
             for (int i = 0; i < productList.size(); i++) {
-                Product product = new Product(productList.get(i).getProductId(), marker.getTitle(), marker.getSnippet());
+                Product product = new Product(
+                        productList.get(i).getProductId(),
+                        marker.getTitle(),
+                        marker.getSnippet(),
+                        productList.get(i).getLatitude(),
+                        productList.get(i).getLongitude()
+                );
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constans.PRODUCT, product);
                 createDialog.setArguments(bundle);

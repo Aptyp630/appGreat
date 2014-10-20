@@ -67,7 +67,9 @@ public class QueryToServer {
                 int id = jObj.getInt("id");
                 String title = jObj.getString("title");
                 String description = jObj.getString("description");
-                Product product = new Product(id, title, description);
+                Double latitude = jObj.getDouble("lat");
+                Double longitude = jObj.getDouble("long");
+                Product product = new Product(id, title, description, latitude, longitude);
                 listProduct.add(product);
             }
         } catch (JSONException e) {

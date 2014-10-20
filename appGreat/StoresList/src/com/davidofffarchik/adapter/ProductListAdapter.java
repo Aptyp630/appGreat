@@ -52,6 +52,9 @@ public class ProductListAdapter extends BaseAdapter{
         //textView.setText(String.valueOf(newProduct.getProductId()));
         textView.setText(newProduct.getTitle());
         //textView.setText(newProduct.getDescription());
+        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
+        //textView.setText(String.valueOf(newProduct.getLatitude()));
+        //textView.setText(String.valueOf(newProduct.getLongitude()));
         return view;
     }
 

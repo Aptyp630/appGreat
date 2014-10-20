@@ -1,10 +1,14 @@
 package com.davidofffarchik.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.davidofffarchik.R;
+import com.davidofffarchik.addnewshop.autorization.SignInRegister;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.fragments.MapFragment;
 import com.davidofffarchik.fragments.StoreFragment;
@@ -59,5 +63,21 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     @Override
     public void onTabReselected(ActionBar.Tab tab,  FragmentTransaction ft) {
         //nothing doing
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_for_actiontab, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action :
+                Intent intent = new Intent(this, SignInRegister.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

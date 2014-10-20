@@ -11,4 +11,16 @@
     <string name="product_description_dialog">Product Description:</string>
     <string name="product_overview">Product overview:</string>
     <string name="load">Loading</string>
+    <string name="shopTitle">Shop Title:</string>
+    <string name="shopDescription">Shop Description:</string>
+    <string name="shopLat">First coordinate on the Map:</string>
+    <string name="shopLong">Second coordinate on the Map:</string>
+    <string name="createShop">Create Shop</string>
+    <string name="registerEmail">E-mail</string>
+    <string name="registerPassword">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="registerForm">Registration Form</string>
+    <string name="signInBtn">SIGN UP</string>
+    <string name="loginBtn">LOGIN</string>
 </resources>

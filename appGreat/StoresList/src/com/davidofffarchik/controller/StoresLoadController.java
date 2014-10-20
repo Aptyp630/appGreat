@@ -2,6 +2,7 @@ package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;

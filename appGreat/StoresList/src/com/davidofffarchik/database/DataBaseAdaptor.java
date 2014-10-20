@@ -49,7 +49,6 @@ public class DataBaseAdaptor{
 
     public String[] getColumnNames(){
         Cursor cursor = sq.query(ProductTable.TABLE_NAME, null, null, null, null, null, null);
-
         return cursor.getColumnNames();
     }
 
@@ -58,40 +57,50 @@ public class DataBaseAdaptor{
             if(getProductByID(product.getProductId()) == null) {
                 addProduct(product);
             }else
-            updateProduct(product, product.getProductId());
+            updateProduct(product);
         }
     }
 
     private Product getProductByID(int id){
+        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         String where = ProductTable.PRODUCT_ID + "=" + id;
         Cursor cursor = sq.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, where, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             String title = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_TITLE));
             String description = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_DESCRIPTION));
+            Double latitude = cursor.getDouble(cursor.getColumnIndex(ProductTable.PRODUCT_LATITUDE));
+            Double longitude = cursor.getDouble(cursor.getColumnIndex(ProductTable.PRODUCT_LONGITUDE));
             cursor.close();
-            return new Product(id, title, description);
+            return new Product(id, title, description, latitude, longitude);
         }
         return null;
    }
 
    private void addProduct(Product product){
+       //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
            ContentValues contentValues = new ContentValues();
            contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
            contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
            contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
+           contentValues.put(ProductTable.PRODUCT_LATITUDE, product.getLatitude());
+           contentValues.put(ProductTable.PRODUCT_LONGITUDE, product.getLongitude());
            sq.insert(ProductTable.TABLE_NAME, null, contentValues);
    }
 
-    private void updateProduct(Product product, int id){
+    private void updateProduct(Product product){
+        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         ContentValues contentValues = new ContentValues();
-        String where = ProductTable.PRODUCT_ID + "=" + id;
+        String where = ProductTable.PRODUCT_ID + "=" + product.getProductId();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
         contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
         contentValues.put(ProductTable.PRODUCT_DESCRIPTION, product.getDescription());
+        contentValues.put(ProductTable.PRODUCT_LATITUDE, product.getLatitude());
+        contentValues.put(ProductTable.PRODUCT_LONGITUDE, product.getLongitude());
         sq.update(ProductTable.TABLE_NAME, contentValues, where, null);
     }
 
     public List<Product> getProductTitle(){
+        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         List<Product> productList = new ArrayList<Product>();
             Cursor cursor = sq.query(ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null);
         if(cursor.moveToFirst()){
@@ -99,7 +108,9 @@ public class DataBaseAdaptor{
                 int id = cursor.getInt(cursor.getColumnIndex(ProductTable.PRODUCT_ID));
                 String title = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_TITLE));
                 String description = cursor.getString(cursor.getColumnIndex(ProductTable.PRODUCT_DESCRIPTION));
-                Product product = new Product(id, title, description);
+                Double latitude = cursor.getDouble(cursor.getColumnIndex(ProductTable.PRODUCT_LATITUDE));
+                Double longitude = cursor.getDouble(cursor.getColumnIndex(ProductTable.PRODUCT_LONGITUDE));
+                Product product = new Product(id, title, description, latitude, longitude);
                 productList.add(product);
             }while (cursor.moveToNext());
         }
