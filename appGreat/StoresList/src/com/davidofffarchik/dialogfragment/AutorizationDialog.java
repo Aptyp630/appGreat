@@ -1,4 +1,4 @@
-package com.davidofffarchik.addnewshop.autorization;
+package com.davidofffarchik.dialogfragment;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,7 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 
-public class AutorizationDialog extends DialogFragment implements View.OnClickListener{
+public class
+        AutorizationDialog extends DialogFragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,9 +1,8 @@
-package com.davidofffarchik.addnewshop.autorization;
+package com.davidofffarchik.dialogfragment;
 
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +12,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.query.QueryRegistration;
 
 public class RegistrationDialog extends DialogFragment implements View.OnClickListener{
 
+    private EditText email;
+    private EditText password;
+    private EditText confirmPassword;
+    private EditText userName;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment_sign_in, null);
         getDialog().setTitle(R.string.registerForm);
 
-        EditText email = (EditText) view.findViewById(R.id.email_edit);
-        EditText password = (EditText) view.findViewById(R.id.password_edit);
-        EditText confirmPassword = (EditText) view.findViewById(R.id.password_confirm);
+        email = (EditText) view.findViewById(R.id.email_edit);
+        password = (EditText) view.findViewById(R.id.password_edit);
+        confirmPassword = (EditText) view.findViewById(R.id.password_confirm);
+        userName = (EditText) view.findViewById(R.id.user_name);
+
         Button registerBtn = (Button) view.findViewById(R.id.registerBtn);
         Button cancelBtn = (Button) view.findViewById(R.id.cancelBtn);
         registerBtn.setOnClickListener(this);
@@ -35,7 +42,13 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerBtn :
-                Toast.makeText(getActivity(), "Registered", Toast.LENGTH_SHORT).show();
+                String getEmail = email.getText().toString();
+                String getPassword = password.getText().toString();
+                String getConfirmedPassword = password.getText().toString();
+                String getUserName = userName.getText().toString();
+                if(getEmail == null && getPassword == null && getConfirmedPassword == null && getUserName == null)
+                    Toast.makeText(getActivity(), "Please, enter all data in the filds", Toast.LENGTH_LONG).show();
+                new QueryRegistration().sendAutorizationData(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName);
                 break;
             case R.id.cancelBtn :
                 this.dismiss();
@@ -51,6 +64,4 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
     public void onCancel(DialogInterface dialog){
         super.onCancel(dialog);
     }
-
-
 }

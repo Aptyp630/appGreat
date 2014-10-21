@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import com.davidofffarchik.R;
 import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.dialogfragment.AutorizationDialog;
+import com.davidofffarchik.dialogfragment.RegistrationDialog;
 
 public class SignInRegister extends FragmentActivity implements View.OnClickListener{
 
