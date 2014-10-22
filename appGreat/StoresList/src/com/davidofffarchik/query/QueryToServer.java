@@ -21,7 +21,7 @@ public class QueryToServer {
 
     //СОЗДАНИЕ ОЧЕРЕДИ ЗАПРОСОВ
     //ВЫЗОВ МЕТОДОВ, КОТОРЫЕ ПАРСИЛИ ОБЪЕКТ И МАССИВ
-    public static OnResponseListener callGetProducts(final OnResponseListener showProductListener, final Context context, final int currentPage) {
+    public static void callGetProducts(final OnResponseListener showProductListener, final Context context, final int currentPage) {
         String url = "http://protected-wave-2984.herokuapp.com/api/product_list.json?page="+currentPage;
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -39,7 +39,6 @@ public class QueryToServer {
                     }
                 });
                 requestQueue.add(jsonObjectRequest);
-        return showProductListener;
     }
     //##################################################################################
 

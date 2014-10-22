@@ -2,6 +2,7 @@ package com.davidofffarchik.dialogfragment;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.query.QueryRegistration;
 
 public class RegistrationDialog extends DialogFragment implements View.OnClickListener{
@@ -46,9 +48,19 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getPassword = password.getText().toString();
                 String getConfirmedPassword = password.getText().toString();
                 String getUserName = userName.getText().toString();
-                if(getEmail == null && getPassword == null && getConfirmedPassword == null && getUserName == null)
-                    Toast.makeText(getActivity(), "Please, enter all data in the filds", Toast.LENGTH_LONG).show();
-                new QueryRegistration().sendAutorizationData(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName);
+                QueryRegistration queryRegistration = new QueryRegistration();
+                QueryRegistration.OnCreateNewShop listener = new QueryRegistration.OnCreateNewShop() {
+                    @Override
+                    public void createNewShop() {
+                        Intent intent = new Intent(getActivity(), AddNewShop.class);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void errorInternetConnection() {
+                        Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                queryRegistration.sendAutorizationData(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName, listener);
                 break;
             case R.id.cancelBtn :
                 this.dismiss();

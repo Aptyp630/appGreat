@@ -2,7 +2,6 @@ package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,7 +19,8 @@ public class QueryRegistration{
             final String userEmail,
             final String password,
             final String passwordConfirm,
-            final String userName
+            final String userName,
+            final OnCreateNewShop listener
     ) {
         String url = "http://protected-wave-2984.herokuapp.com/api/create_user.json";
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -33,22 +33,19 @@ public class QueryRegistration{
         }catch (Exception e){
             e.printStackTrace();
         }
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, jsonObject,
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
-                            boolean success = jsonObject.getBoolean("success");
-                            String login = jsonObject.getString("login");
-                            String message = jsonObject.getString("message");
-                            Log.v(Constans.LOG_TAG, "Успешно" +login);
-                            if(success){
-                                Log.v(Constans.LOG_TAG, "Успешно" +login);
-                                Toast.makeText(context, "Успешно" +login, Toast.LENGTH_SHORT).show();
-                            }else{
-                                Log.v(Constans.LOG_TAG, "Проверьте правильность ввода данных!" +message);
-                                Toast.makeText(context, "Проверьте правильность ввода данных!" +message, Toast.LENGTH_SHORT).show();
-                            }
+                            JSONObject jsonUser = jsonObject.getJSONObject("user");
+                            String token = jsonUser.getString("token");
+                            Log.v(Constans.LOG_TAG, token);
+                            String email = jsonUser.getString("email");
+                            Log.v(Constans.LOG_TAG, email);
+                            boolean success = jsonUser.getBoolean("success");
+                            Log.v(Constans.LOG_TAG, String.valueOf(success));
+                            listener.createNewShop();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -57,9 +54,14 @@ public class QueryRegistration{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        listener.errorInternetConnection();
                     }
                 });
         queue.add(jsonObjectRequest);
+    }
+
+    public interface OnCreateNewShop{
+        public void createNewShop();
+        public void errorInternetConnection();
     }
 }

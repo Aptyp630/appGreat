@@ -11,4 +11,5 @@ public class AddNewShop extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_shop);
     }
+
 }

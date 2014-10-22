@@ -2,7 +2,6 @@ package com.davidofffarchik.controller;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
@@ -56,7 +55,6 @@ public class StoresLoadController{
                 dataBaseAdaptor.closeDB();
             }
          };
-
         if(dialog == null)
             dialog = ProgressDialog.show(context, Constans.LOAD_TITLE, Constans.LOAD_PRODUCTS);
         dialog.show();

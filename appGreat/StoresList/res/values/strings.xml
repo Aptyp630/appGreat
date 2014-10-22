@@ -13,11 +13,10 @@
     <string name="load">Loading</string>
     <string name="shopTitle">Shop Title:</string>
     <string name="shopDescription">Shop Description:</string>
-    <string name="shopLat">First coordinate on the Map:</string>
-    <string name="shopLong">Second coordinate on the Map:</string>
     <string name="createShop">Create Shop</string>
+    <string name="pickMap">Pick Point the Map</string>
     <string name="registerEmail">E-mail</string>
-    <string name="registerPassword">Password</string>
+    <string name="registerPassword">Password (min. 8 items)</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="userName">User Name</string>
     <string name="register">Register</string>
@@ -25,4 +24,6 @@
     <string name="registerForm">REGISTRATION FORM</string>
     <string name="signInBtn">SIGN UP</string>
     <string name="loginBtn">LOGIN</string>
+    <string name="representTextToSignin">Before to create new Product, you are must to SIGN UP.</string>
+    <string name="representTextToLogin">If you are already done registration, you are must only LOGIN to your account to create new Product</string>
 </resources>

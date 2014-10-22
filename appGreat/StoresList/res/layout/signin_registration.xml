@@ -3,51 +3,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="150dp">
-        <EditText
-                android:layout_width="300dp"
+              android:layout_height="match_parent"
+              android:gravity="center">
+        <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="10"
-                android:id="@+id/editText"
-                android:hint="@string/registerEmail"
+                android:id="@+id/representTextToSignin"
+                android:text="@string/representTextToSignin"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"/>
-        <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/editText2"
-                android:hint="@string/registerPassword"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
+                android:layout_marginBottom="10dp"
+                android:textSize="20sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="#ffffcc"/>
         <Button
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/signInBtn"
                 android:id="@+id/signInBtn"
-                android:padding="15dp"
-                android:textSize="10sp"/>
+                android:padding="20dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="50dp"
+                android:textColor="#ffff7000"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/representTextToLogin"
+                android:text="@string/representTextToLogin"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:textSize="20sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="#ffffcc"/>
+
         <Button
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/loginBtn"
                 android:id="@+id/loginBtn"
-                android:padding="15dp"
-                android:textSize="10sp"/>
-    </LinearLayout>
+                android:textSize="20sp"
+                android:padding="20dp"
+                android:textColor="#ffff7000"/>
 </LinearLayout>
