@@ -3,6 +3,7 @@ package com.davidofffarchik.addnewshop;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +53,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         String latitude = getLatitude();
         String longitude = getLongitude();
         String token = returnToken();
+        Log.v("Pass token", token);
         QueryCreateNewProduct queryCreateNewProduct = new QueryCreateNewProduct();
         queryCreateNewProduct.addNewProductToServer(this, title, description, latitude, longitude, token);
     }

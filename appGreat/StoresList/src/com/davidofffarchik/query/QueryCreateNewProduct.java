@@ -24,22 +24,20 @@ public class QueryCreateNewProduct {
     {
         String url = "http://protected-wave-2984.herokuapp.com/api/create_product.json";
         RequestQueue queue = Volley.newRequestQueue(context);
-        JSONObject object = new JSONObject();
+        JSONObject parentObject = new JSONObject();
+        Log.v("Response", "is " +parentObject);
+        JSONObject jsonProduct = new JSONObject();
         try {
-            JSONObject obj = new JSONObject("product");
-            obj.put("title", title);
-            obj.put("description", description);
-            obj.put("lat", latitude);
-            obj.put("long", longitude);
-            obj.opt("product");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("token", token);
-            object.putOpt("product", jsonObject);
-
+                jsonProduct.put("title", title);
+                jsonProduct.put("description", description);
+                jsonProduct.put("latitude", latitude);
+                jsonProduct.put("longitude", longitude);
+            parentObject.put("product", jsonProduct);
+            parentObject.put("token", token);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parentObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Log.v("Response from Server ", "is " + jsonObject);
