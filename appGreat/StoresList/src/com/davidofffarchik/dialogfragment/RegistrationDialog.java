@@ -49,14 +49,14 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getConfirmedPassword = password.getText().toString();
                 String getUserName = userName.getText().toString();
                 QueryRegistration queryRegistration = new QueryRegistration();
-                QueryRegistration.OnCreateNewShop listener = new QueryRegistration.OnCreateNewShop() {
+                QueryRegistration.OnCreateProductFromRegistration listener = new QueryRegistration.OnCreateProductFromRegistration() {
                     @Override
-                    public void createNewShop() {
+                    public void createNewShopRegistration() {
                         Intent intent = new Intent(getActivity(), AddNewShop.class);
                         startActivity(intent);
                     }
                     @Override
-                    public void errorInternetConnection() {
+                    public void errorInternetConnectionRegistration() {
                         Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 };

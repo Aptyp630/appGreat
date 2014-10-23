@@ -20,7 +20,7 @@ public class QueryRegistration{
             final String password,
             final String passwordConfirm,
             final String userName,
-            final OnCreateNewShop listener
+            final OnCreateProductFromRegistration listener
     ) {
         String url = "http://protected-wave-2984.herokuapp.com/api/create_user.json";
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -45,7 +45,7 @@ public class QueryRegistration{
                             Log.v(Constans.LOG_TAG, email);
                             boolean success = jsonUser.getBoolean("success");
                             Log.v(Constans.LOG_TAG, String.valueOf(success));
-                            listener.createNewShop();
+                            listener.createNewShopRegistration();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -54,14 +54,14 @@ public class QueryRegistration{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        listener.errorInternetConnection();
+                        listener.errorInternetConnectionRegistration();
                     }
                 });
         queue.add(jsonObjectRequest);
     }
 
-    public interface OnCreateNewShop{
-        public void createNewShop();
-        public void errorInternetConnection();
+    public interface OnCreateProductFromRegistration {
+        public void createNewShopRegistration();
+        public void errorInternetConnectionRegistration();
     }
 }

@@ -14,10 +14,15 @@ import org.json.JSONObject;
 
 public class QueryLogin{
 
-    public static void logInTo(final Context context, final String email, final String password){
+    public static void logInTo(
+            final Context context,
+            final String email,
+            final String password,
+            final OnCreateProductFromLogin listener
+    ){
         String url = "http://protected-wave-2984.herokuapp.com/api/login.json";
         RequestQueue queue = Volley.newRequestQueue(context);
-        JSONObject jsonObject = new JSONObject();
+        final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("email", email);
             jsonObject.put("password", password);
@@ -29,8 +34,14 @@ public class QueryLogin{
             public void onResponse(JSONObject jsonObject) {
                 Log.v(Constans.LOG_TAG, "Вывод для логина " + jsonObject);
                 try {
-                    String emailLogin = jsonObject.getString("email");
-                    String passwordLogin = jsonObject.getString("password");
+                    JSONObject jsonUser = jsonObject.getJSONObject("user");
+                    String token = jsonUser.getString("token");
+                    Log.v(Constans.LOG_TAG, token);
+                    String email = jsonUser.getString("email");
+                    Log.v(Constans.LOG_TAG, email);
+                    boolean success = jsonUser.getBoolean("success");
+                    Log.v(Constans.LOG_TAG, String.valueOf(success));
+                    listener.createNewShopLogin(token);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -38,10 +49,13 @@ public class QueryLogin{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Log.v(Constans.LOG_TAG, "Ошибка сети");
+                listener.errorInternetConnectionLogin();
             }
         });
         queue.add(jsonObjectRequest);
     }
-
+    public interface OnCreateProductFromLogin{
+        public void createNewShopLogin(String token);
+        public void errorInternetConnectionLogin();
+    }
 }

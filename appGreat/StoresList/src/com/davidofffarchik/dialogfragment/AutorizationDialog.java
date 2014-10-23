@@ -1,5 +1,6 @@
 package com.davidofffarchik.dialogfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -7,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.addnewshop.AddNewShop;
+import com.davidofffarchik.query.QueryLogin;
 
 public class AutorizationDialog extends DialogFragment implements View.OnClickListener{
 
@@ -34,6 +38,22 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
             case R.id.enteringBtn :
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
+                QueryLogin queryLogin = new QueryLogin();
+                QueryLogin.OnCreateProductFromLogin listener = new QueryLogin.OnCreateProductFromLogin() {
+
+                    @Override
+                    public void createNewShopLogin(String token) {
+                        Intent intent = new Intent(getActivity(), AddNewShop.class);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void errorInternetConnectionLogin() {
+                        Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                queryLogin.logInTo(this.getActivity(), email, password, listener);
                 break;
             case R.id.cancelBtn : dismiss();
                 break;

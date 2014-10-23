@@ -4,35 +4,86 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center">
+              android:gravity="top">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/putNameShop"
+            android:background="#ffffcc"
+            android:textColor="#ffff7000"
+            android:hint="@string/shopTitle"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/putDescription"
+            android:background="#ffffcc"
+            android:textColor="#ffff7000"
+            android:hint="@string/shopDescription"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionToMap"
+            android:text="@string/descriptionToMap"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffff7000"/>
 
-    <TextView
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/shopTitle"
-            android:id="@+id/nameShop"
-            android:padding="20dp"
-            android:textSize="30sp"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/putNameShop"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/shopDescription"
-            android:id="@+id/descriptionShop"
-            android:padding="20dp"
-            android:textSize="30sp"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/putDescription"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+        <EditText
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:id="@+id/latitude"
+                android:background="#ffffcc"
+                android:textColor="#ffff7000"
+                android:hint="@string/latitude"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+        <EditText
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:id="@+id/longitude"
+                android:background="#ffffcc"
+                android:textColor="#ffff7000"
+                android:hint="@string/longitude"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            </LinearLayout>
 
     <Button android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/pickMap"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textColor="#ffff7000"
+            android:id="@+id/pickMap"/>
+
+    <Button android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/createShop"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textColor="#ffff7000"
+            android:id="@+id/createShop"/>
+
 </LinearLayout>
