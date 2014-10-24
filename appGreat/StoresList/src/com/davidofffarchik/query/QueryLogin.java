@@ -26,13 +26,14 @@ public class QueryLogin{
         try {
             jsonObject.put("email", email);
             jsonObject.put("password", password);
+            Log.v("Отправленные данные при регистрации", "" +jsonObject);
         }catch (Exception e){
             e.printStackTrace();
         }
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Log.v(Constans.LOG_TAG, "Вывод для логина " + jsonObject);
+                Log.v("Что мне приходит", "" +jsonObject);
                 try {
                     JSONObject jsonUser = jsonObject.getJSONObject("user");
                     String token = jsonUser.getString("token");
@@ -41,6 +42,7 @@ public class QueryLogin{
                     Log.v(Constans.LOG_TAG, email);
                     boolean success = jsonUser.getBoolean("success");
                     Log.v(Constans.LOG_TAG, String.valueOf(success));
+                    Log.v("Что я парсю", "" +jsonUser);
                     listener.createNewShopLogin(token);
                 } catch (JSONException e) {
                     e.printStackTrace();

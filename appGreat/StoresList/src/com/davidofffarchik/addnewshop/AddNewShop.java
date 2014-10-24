@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.models.Product;
 import com.davidofffarchik.query.QueryCreateNewProduct;
 
 public class AddNewShop extends Activity implements View.OnClickListener{
@@ -26,17 +27,21 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         setContentView(R.layout.add_new_shop);
         pickMap = (Button) findViewById(R.id.pickMap);
         createShop = (Button) findViewById(R.id.createShop);
+        if(getLatitude().isEmpty() || getLongitude().isEmpty())
+            createShop.setVisibility(View.INVISIBLE);
         pickMap.setOnClickListener(this);
         createShop.setOnClickListener(this);
     }
 
     public String getLatitude(){
        latitude = (EditText) findViewById(R.id.latitude);
+        //latitude.setText("12");
        return latitude.getText().toString();
     }
 
     public String getLongitude(){
         longitude = (EditText) findViewById(R.id.longitude);
+        //longitude.setText("15");
         return longitude.getText().toString();
     }
 
@@ -50,12 +55,12 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         productDescription = (EditText) findViewById(R.id.putDescription);
         String title = productName.getText().toString();
         String  description = productDescription.getText().toString();
-        String latitude = getLatitude();
-        String longitude = getLongitude();
+        Double latitude = Double.valueOf(getLatitude());
+        Double longitude = Double.valueOf(getLongitude());
         String token = returnToken();
         Log.v("Pass token", token);
         QueryCreateNewProduct queryCreateNewProduct = new QueryCreateNewProduct();
-        queryCreateNewProduct.addNewProductToServer(this, title, description, latitude, longitude, token);
+        queryCreateNewProduct.addNewProductToServer(this, new Product(title, description, latitude, longitude), token);
     }
 
     @Override
@@ -66,7 +71,6 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.createShop :
-                if(getLatitude() == null || getLongitude() == null)
                     Toast.makeText(this, "Latitude and Longitude are empty", Toast.LENGTH_LONG).show();
                 passDataToQuery();
                 break;

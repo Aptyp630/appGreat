@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.davidofffarchik.models.Product;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,25 +16,22 @@ public class QueryCreateNewProduct {
 
     public void addNewProductToServer(
             final Context context,
-            final String title,
-            final String description,
-            final String latitude,
-            final String longitude,
+            final Product product,
             final String token
     )
     {
         String url = "http://protected-wave-2984.herokuapp.com/api/create_product.json";
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONObject parentObject = new JSONObject();
-        Log.v("Response", "is " +parentObject);
         JSONObject jsonProduct = new JSONObject();
         try {
-                jsonProduct.put("title", title);
-                jsonProduct.put("description", description);
-                jsonProduct.put("latitude", latitude);
-                jsonProduct.put("longitude", longitude);
+                jsonProduct.put("title", product.getTitle());
+                jsonProduct.put("description", product.getDescription());
+                jsonProduct.put("lat", product.getLatitude());
+                jsonProduct.put("long", product.getLongitude());
             parentObject.put("product", jsonProduct);
             parentObject.put("token", token);
+            Log.v("ParentObject", "is " +parentObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }

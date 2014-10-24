@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.davidofffarchik.constans.Constans;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +29,7 @@ public class QueryRegistration{
             jsonObject.put("password", password);
             jsonObject.put("password_confirmation", passwordConfirm);
             jsonObject.put("username", userName);
+            Log.v("Отправленные данные при регистрации", "" +jsonObject);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -37,14 +37,16 @@ public class QueryRegistration{
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
+                        Log.v("что мне приходит", "" +jsonObject);
                         try {
-                            JSONObject jsonUser = jsonObject.getJSONObject("user");
-                            String token = jsonUser.getString("token");
-                            Log.v(Constans.LOG_TAG, token);
-                            String email = jsonUser.getString("email");
-                            Log.v(Constans.LOG_TAG, email);
-                            boolean success = jsonUser.getBoolean("success");
-                            Log.v(Constans.LOG_TAG, String.valueOf(success));
+                            JSONObject jsonRegistration = jsonObject.getJSONObject("user");
+                            String token = jsonRegistration.getString("token");
+                            Log.v("Token", "is " +token);
+                            String email = jsonRegistration.getString("email");
+                            Log.v("Email", "is " +email);
+                            boolean success = jsonRegistration.getBoolean("success");
+                            Log.v("Success", "is " +success);
+                            Log.v("Что я парсю", "" +jsonRegistration);
                             listener.createNewShopRegistration();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -64,4 +66,5 @@ public class QueryRegistration{
         public void createNewShopRegistration();
         public void errorInternetConnectionRegistration();
     }
+
 }

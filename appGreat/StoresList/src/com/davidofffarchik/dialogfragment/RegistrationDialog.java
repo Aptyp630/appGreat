@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
-import com.davidofffarchik.query.QueryRegistration;
+import com.davidofffarchik.query.QueryToEnter;
 
 public class RegistrationDialog extends DialogFragment implements View.OnClickListener{
 
@@ -46,10 +46,9 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
             case R.id.registerBtn :
                 String getEmail = email.getText().toString();
                 String getPassword = password.getText().toString();
-                String getConfirmedPassword = password.getText().toString();
+                String getConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
-                QueryRegistration queryRegistration = new QueryRegistration();
-                QueryRegistration.OnCreateProductFromRegistration listener = new QueryRegistration.OnCreateProductFromRegistration() {
+                QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {
                     @Override
                     public void createNewShopRegistration() {
                         Intent intent = new Intent(getActivity(), AddNewShop.class);
@@ -60,7 +59,8 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                         Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 };
-                queryRegistration.sendAutorizationData(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName, listener);
+                QueryToEnter queryToEnter = new QueryToEnter();
+                queryToEnter.queryRegistration(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName, listener);
                 break;
             case R.id.cancelBtn :
                 this.dismiss();

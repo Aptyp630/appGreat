@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
-import com.davidofffarchik.query.QueryLogin;
+import com.davidofffarchik.query.QueryToEnter;
 
 public class AutorizationDialog extends DialogFragment implements View.OnClickListener{
 
@@ -38,8 +38,8 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
             case R.id.enteringBtn :
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
-                QueryLogin queryLogin = new QueryLogin();
-                QueryLogin.OnCreateProductFromLogin listener = new QueryLogin.OnCreateProductFromLogin() {
+
+                QueryToEnter.OnCreateProductFromLogin listener = new QueryToEnter.OnCreateProductFromLogin() {
 
                     @Override
                     public void createNewShopLogin(String token) {
@@ -53,7 +53,8 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
                         Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 };
-                queryLogin.logInTo(this.getActivity(), email, password, listener);
+                QueryToEnter queryToEnter = new QueryToEnter();
+                queryToEnter.queryLogin(this.getActivity(), email, password, listener);
                 break;
             case R.id.cancelBtn : dismiss();
                 break;

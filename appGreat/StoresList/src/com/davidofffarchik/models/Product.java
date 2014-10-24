@@ -14,7 +14,11 @@ public class Product implements Serializable{
     //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
 
     public Product(int productId, String title, String description, Double latitude, Double longitude) {
+        this(title, description, latitude, longitude);
         this.productId = productId;
+    }
+
+    public Product(String title, String description, double latitude, double longitude) {
         this.title = title;
         this.description = description;
         this.latitude = latitude;
