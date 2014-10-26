@@ -28,8 +28,8 @@ public class QueryToEnter {
         JSONObject jsonObject = getJsonObject(userEmail, password, passwordConfirm, userName);
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONObject jsonObject) {
-                onResponseRegistration(context, jsonObject, listener);
+            public void onResponse(JSONObject jsonObject){
+                    onResponseRegistration(context, jsonObject, listener);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -47,29 +47,21 @@ public class QueryToEnter {
             jsonObject.put("password", password);
             jsonObject.put("password_confirmation", passwordConfirm);
             jsonObject.put("username", userName);
+            Log.v("Отправляем при регистрации", " " +jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonObject;
     }
 
-    private void onResponseRegistration(Context context, JSONObject jsonObject, OnCreateProductFromRegistration listener){
-            Log.v("JsonObject", "is " +jsonObject);
+    private void onResponseRegistration(Context context, JSONObject jsonObject, OnCreateProductFromRegistration listener) {
+        JSONObject jsonForRegister = new JSONObject();
         try {
-            boolean message = jsonObject.getBoolean("success");
-            if(message) {
-                JSONObject jsonRegistration = jsonObject.getJSONObject("user");
-                String token = jsonRegistration.getString("token");
-                Log.v("Token", "is " + token);
-                String email = jsonRegistration.getString("email");
-                Log.v("Email", "is " + email);
-                boolean success = jsonRegistration.getBoolean("success");
-                Log.v("Success", "is " + success);
-                Log.v("Что я парсю", "" + jsonRegistration);
-                listener.createNewShopRegistration();
-            }else {
-                Toast.makeText(context, "E-mail already exists", Toast.LENGTH_LONG).show();
-            }
+            jsonForRegister.getString("email");
+            jsonForRegister.getBoolean("success");
+            Toast.makeText(context, "Ошибочка вышла", Toast.LENGTH_LONG).show();
+            Log.v("jsonObject", "is " +jsonObject);
+            listener.createNewShopRegistration();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -94,12 +86,12 @@ public void queryLogin(final Context context,
     final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject jsonObject) {
-            onResponseLogin(jsonObject, listener);
+                onResponseLogin(jsonObject, listener);
         }
     }, new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            listener.errorInternetConnectionLogin();
+            listener.responseError();
         }
     });
     queue.add(jsonObjectRequest);
@@ -110,6 +102,7 @@ public void queryLogin(final Context context,
         try {
             jsonObject.put("email", userEmail);
             jsonObject.put("password", password);
+            Log.v("То, что мы отправили", "" +jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -117,24 +110,23 @@ public void queryLogin(final Context context,
     }
 
     private void onResponseLogin(JSONObject jsonObject, OnCreateProductFromLogin listener){
-        try {
-            JSONObject jsonRegistration = jsonObject.getJSONObject("user");
-            String token = jsonRegistration.getString("token");
-            Log.v("Token", "is " +token);
-            String email = jsonRegistration.getString("email");
-            Log.v("Email", "is " +email);
-            boolean success = jsonRegistration.getBoolean("success");
-            Log.v("Success", "is " +success);
-            Log.v("Что я парсю", "" +jsonRegistration);
-            listener.createNewShopLogin(token);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Log.v("То, что мы получаем", "" +jsonObject);
+            try {
+                    JSONObject jsonLogin = jsonObject.getJSONObject("user");
+                Log.v("То, что мы получаем в экземпляре", "" +jsonLogin);
+                    String token = jsonLogin.getString("token");
+                    jsonLogin.getString("email");
+                    jsonLogin.getBoolean("success");
+                    listener.createNewShopLogin(token);
+                Log.v("То, что мы парсим", "" +jsonLogin);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
     }
 
     public interface OnCreateProductFromLogin {
         public void createNewShopLogin(String token);
-        public void errorInternetConnectionLogin();
+        public void responseError();
     }
 
     //************************************Request for Login - end*****************************************************

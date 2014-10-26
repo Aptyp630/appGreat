@@ -56,7 +56,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                     }
                     @Override
                     public void errorInternetConnectionRegistration() {
-                        Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Это E-mail уже существует!", Toast.LENGTH_SHORT).show();
                     }
                 };
                 QueryToEnter queryToEnter = new QueryToEnter();

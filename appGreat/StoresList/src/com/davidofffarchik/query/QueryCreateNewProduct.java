@@ -2,6 +2,7 @@ package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,11 +39,12 @@ public class QueryCreateNewProduct {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parentObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Log.v("Response from Server ", "is " + jsonObject);
+                Toast.makeText(context, "Новый продукт был добавлен", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(context, "Для добавления продукта необходимо заполнить все поля!", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(jsonObjectRequest);

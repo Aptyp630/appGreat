@@ -49,8 +49,8 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
                     }
 
                     @Override
-                    public void errorInternetConnectionLogin() {
-                        Toast.makeText(getActivity(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                    public void responseError() {
+                            Toast.makeText(getActivity(), "Вы ввели не существующий E-mail или не правильный пароль", Toast.LENGTH_SHORT).show();
                     }
                 };
                 QueryToEnter queryToEnter = new QueryToEnter();
