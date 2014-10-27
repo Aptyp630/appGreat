@@ -29,14 +29,13 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         setContentView(R.layout.add_new_shop);
         pickMap = (Button) findViewById(R.id.pickMap);
         createShop = (Button) findViewById(R.id.createShop);
-        if(getLatitude().isEmpty() || getLongitude().isEmpty())
-            createShop.setVisibility(View.INVISIBLE);
+        latitude = (EditText) findViewById(R.id.latitude);
+        longitude = (EditText) findViewById(R.id.longitude);
         pickMap.setOnClickListener(this);
         createShop.setOnClickListener(this);
     }
 
     public String getLatitude(){
-       latitude = (EditText) findViewById(R.id.latitude);
         Bundle extras = getIntent().getExtras();
         double latitudePoint = extras.getDouble("latitude");
         latitude.setText(String.valueOf(latitudePoint));
@@ -44,7 +43,6 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     }
 
     public String getLongitude(){
-        longitude = (EditText) findViewById(R.id.longitude);
         Bundle extras = getIntent().getExtras();
         double longitudePoint = extras.getDouble("longitude");
         longitude.setText(String.valueOf(longitudePoint));

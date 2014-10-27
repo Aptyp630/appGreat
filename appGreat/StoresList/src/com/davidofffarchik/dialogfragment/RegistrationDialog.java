@@ -48,19 +48,21 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getPassword = password.getText().toString();
                 String getConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
+                QueryToEnter queryToEnter = new QueryToEnter();
                 QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {
                     @Override
-                    public void createNewShopRegistration() {
+                    public void createNewShopRegistration(String token) {
                         Intent intent = new Intent(getActivity(), AddNewShop.class);
+                        intent.putExtra("token", token);
                         startActivity(intent);
                     }
                     @Override
                     public void errorInternetConnectionRegistration() {
-                        Toast.makeText(getActivity(), "Это E-mail уже существует!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
                     }
                 };
-                QueryToEnter queryToEnter = new QueryToEnter();
                 queryToEnter.queryRegistration(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName, listener);
+
                 break;
             case R.id.cancelBtn :
                 this.dismiss();

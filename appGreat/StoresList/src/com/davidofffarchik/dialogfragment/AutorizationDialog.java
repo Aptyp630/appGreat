@@ -50,7 +50,7 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
 
                     @Override
                     public void responseError() {
-                            Toast.makeText(getActivity(), "Вы ввели не существующий E-mail или не правильный пароль", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Нет такого E-mail в базе", Toast.LENGTH_SHORT).show();
                     }
                 };
                 QueryToEnter queryToEnter = new QueryToEnter();

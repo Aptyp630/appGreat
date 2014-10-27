@@ -47,7 +47,7 @@ public class QueryToEnter {
             jsonObject.put("password", password);
             jsonObject.put("password_confirmation", passwordConfirm);
             jsonObject.put("username", userName);
-            Log.v("Отправляем при регистрации", " " +jsonObject);
+            Log.v("Отправляем при регистрации", " " + jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -55,20 +55,32 @@ public class QueryToEnter {
     }
 
     private void onResponseRegistration(Context context, JSONObject jsonObject, OnCreateProductFromRegistration listener) {
-        JSONObject jsonForRegister = new JSONObject();
+        Log.v("Что приходит после успешно отправленных данных", " " +jsonObject);
         try {
-            jsonForRegister.getString("email");
-            jsonForRegister.getBoolean("success");
-            Toast.makeText(context, "Ошибочка вышла", Toast.LENGTH_LONG).show();
-            Log.v("jsonObject", "is " +jsonObject);
-            listener.createNewShopRegistration();
+            if(jsonObject.has("user")) {
+                JSONObject jsonRegistration = jsonObject.getJSONObject("user");
+                String token = jsonRegistration.getString("token");
+                Log.v("Token", "is " + token);
+                String email = jsonRegistration.getString("email");
+                Log.v("Email", "is " + email);
+                boolean success = jsonRegistration.getBoolean("success");
+                Log.v("Success", "is " + success);
+                Log.v("Что я парсю", "" + jsonRegistration);
+                listener.createNewShopRegistration(token);
+            }else{
+                String message = jsonObject.getString("message");
+                Log.v("Success", "is " + message);
+                boolean success = jsonObject.getBoolean("success");
+                Log.v("Success", "is " + success);
+                Toast.makeText(context, "Такой E-mail уже зарегистрирвоан в системе!", Toast.LENGTH_LONG).show();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     public interface OnCreateProductFromRegistration {
-        public void createNewShopRegistration();
+        public void createNewShopRegistration(String token);
         public void errorInternetConnectionRegistration();
     }
 
@@ -102,7 +114,7 @@ public void queryLogin(final Context context,
         try {
             jsonObject.put("email", userEmail);
             jsonObject.put("password", password);
-            Log.v("То, что мы отправили", "" +jsonObject);
+            Log.v("То, что мы отправили", "" + jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -113,12 +125,12 @@ public void queryLogin(final Context context,
         Log.v("То, что мы получаем", "" +jsonObject);
             try {
                     JSONObject jsonLogin = jsonObject.getJSONObject("user");
-                Log.v("То, что мы получаем в экземпляре", "" +jsonLogin);
                     String token = jsonLogin.getString("token");
+                    Log.v("Token", "is " + token);
                     jsonLogin.getString("email");
                     jsonLogin.getBoolean("success");
                     listener.createNewShopLogin(token);
-                Log.v("То, что мы парсим", "" +jsonLogin);
+                    Log.v("То, что мы парсим", "" +jsonLogin);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

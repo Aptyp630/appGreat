@@ -44,7 +44,7 @@ public class QueryCreateNewProduct {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(context, "Для добавления продукта необходимо заполнить все поля!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Вы заполнили не все поля!", Toast.LENGTH_LONG).show();
             }
         });
         queue.add(jsonObjectRequest);
