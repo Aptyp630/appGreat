@@ -2,8 +2,6 @@ package com.davidofffarchik.webclient;
 
 
 import com.davidofffarchik.models.Product;
-import com.davidofffarchik.models.Success;
-import com.davidofffarchik.models.User;
 
 public class WebClient {
 
@@ -23,5 +21,5 @@ public class WebClient {
 
     }
 
-    Parameter<Success> parameter = RegistrationParam(User);
+    //Parameter<Success> parameter = RegistrationParam(User);
 }
