@@ -1,9 +1,16 @@
 package com.davidofffarchik.webclient;
 
 
+import android.content.Context;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.models.Product;
 import com.davidofffarchik.models.Success;
 import com.davidofffarchik.models.User;
+import org.json.JSONObject;
 
 public class WebClient {
 
@@ -11,7 +18,7 @@ public class WebClient {
 
     }
 
-    public static void callLogin(String user, WebClientListener webClientListener){
+    public static void callLogin(User user, WebClientListener webClientListener){
 
     }
 
@@ -19,9 +26,28 @@ public class WebClient {
 
     }
 
-    public static void callRegistration(String user, WebClientListener webClientListener){
+    public static void callRegistration(Context context, User user, WebClientListener webClientListener) {
 
+        Parameter<User> parameter = new RegistrationParam(user);
+        makeRequest(context, parameter, webClientListener);
     }
 
-    Parameter<Success> parameter = RegistrationParam(User);
+    private static void makeRequest(final Context context, final Parameter<User> parameter, final WebClientListener webClientListener){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = parameter.getUrl();
+        JSONObject jsonObject = parameter.getBody();
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(parameter.getRequestMethod(), url+parameter.getApiMethod(), jsonObject , new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                User user = parameter.parseResponse(context, jsonObject);
+                webClientListener.onResponseSuccess(user);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                webClientListener.onResponseError();
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
 }

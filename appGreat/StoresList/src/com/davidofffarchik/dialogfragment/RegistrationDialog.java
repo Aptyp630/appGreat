@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
-import com.davidofffarchik.query.QueryToEnter;
+import com.davidofffarchik.models.User;
+import com.davidofffarchik.webclient.WebClient;
+import com.davidofffarchik.webclient.WebClientListener;
 
 public class RegistrationDialog extends DialogFragment implements View.OnClickListener{
 
@@ -48,6 +50,22 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getPassword = password.getText().toString();
                 String getConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
+                User user = new User(getEmail, getPassword, getConfirmedPassword, getUserName);
+                WebClientListener<User> webClientListener = new WebClientListener<User>() {
+                    @Override
+                    public void onResponseSuccess(User result) {
+                        Intent intent = new Intent(getActivity(), AddNewShop.class);
+                        intent.putExtra("token", result.getToken());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onResponseError() {
+                        Toast.makeText(getActivity(), "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                WebClient.callRegistration(getActivity(), user, webClientListener);
+                /*
                 QueryToEnter queryToEnter = new QueryToEnter();
                 QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {
                     @Override
@@ -62,6 +80,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                     }
                 };
                 queryToEnter.queryRegistration(this.getActivity(), getEmail, getPassword, getConfirmedPassword, getUserName, listener);
+                */
 
                 break;
             case R.id.cancelBtn :

@@ -1,9 +1,9 @@
 package com.davidofffarchik.webclient;
 
 
-public interface WebClientListener {
+public interface WebClientListener<T> {
 
-    public void onResponseSuccess();
+    public void onResponseSuccess(T result);
     public void onResponseError();
 
 }

@@ -1,22 +1,19 @@
 package com.davidofffarchik.webclient;
 
-import com.android.volley.Request;
+import android.content.Context;
 import org.json.JSONObject;
 
 public abstract class Parameter<T> {
 
-    abstract public Request.Method getRequestMethod();
+    abstract public int getRequestMethod();
 
-    abstract public T parseResponse (JSONObject jsonObject);
+    abstract public T parseResponse (Context context, JSONObject jsonObject);
 
     abstract public JSONObject getBody();
 
     abstract public String getApiMethod();
 
     public String getUrl(){
-        return null;
+        return "http://protected-wave-2984.herokuapp.com/api/";
     }
-
-
-
 }

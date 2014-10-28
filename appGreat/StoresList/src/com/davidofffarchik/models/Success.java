@@ -1,8 +1,5 @@
 package com.davidofffarchik.models;
 
-/**
- * Created by root on 27.10.14.
- */
 public class Success {
 
     private String message;
