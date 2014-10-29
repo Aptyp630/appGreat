@@ -8,9 +8,9 @@ import com.davidofffarchik.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegistrationParam  extends Parameter<User>{
+public class RegistrationParam  extends Parameter<User> {
 
-    private User user;
+   private User user;
 
     public RegistrationParam(User user){
         this.user = user;
@@ -60,7 +60,7 @@ public class RegistrationParam  extends Parameter<User>{
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return jsonObject;
     }
 
     @Override

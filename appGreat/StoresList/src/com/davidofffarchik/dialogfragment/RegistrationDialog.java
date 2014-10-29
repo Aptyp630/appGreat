@@ -46,14 +46,15 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.registerBtn :
-                String getEmail = email.getText().toString();
-                String getPassword = password.getText().toString();
-                String getConfirmedPassword = confirmPassword.getText().toString();
+                String getUserEmail = email.getText().toString();
+                String getUserPassword = password.getText().toString();
+                String getUserConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
-                User user = new User(getEmail, getPassword, getConfirmedPassword, getUserName);
+                User user = new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName);
                 WebClientListener<User> webClientListener = new WebClientListener<User>() {
                     @Override
                     public void onResponseSuccess(User result) {
+                        Log.v("Token from registered", "is " +result.getToken());
                         Intent intent = new Intent(getActivity(), AddNewShop.class);
                         intent.putExtra("token", result.getToken());
                         startActivity(intent);

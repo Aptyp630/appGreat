@@ -8,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.models.Product;
-import com.davidofffarchik.models.Success;
 import com.davidofffarchik.models.User;
 import org.json.JSONObject;
 
@@ -39,8 +38,7 @@ public class WebClient {
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(parameter.getRequestMethod(), url+parameter.getApiMethod(), jsonObject , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                User user = parameter.parseResponse(context, jsonObject);
-                webClientListener.onResponseSuccess(user);
+                    webClientListener.onResponseSuccess(parameter.parseResponse(context, jsonObject).getToken());
             }
         }, new Response.ErrorListener() {
             @Override

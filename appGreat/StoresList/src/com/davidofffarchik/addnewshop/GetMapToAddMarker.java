@@ -67,12 +67,16 @@ public class GetMapToAddMarker extends FragmentActivity{
     View.OnClickListener getCoordinatesListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
-            intent.putExtra("latitude", latitude);
-            Log.v("Get lat", " " +latitude);
-            intent.putExtra("longitude", longitude);
-            Log.v("Get long", " " +longitude);
-            startActivity(intent);
+            if(latitude == 0.0 || longitude == 0.0) {
+                Toast.makeText(getApplicationContext(), "Before drag the Marker", Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
+                intent.putExtra("latitude", latitude);
+                Log.v("Get lat", " " + latitude);
+                intent.putExtra("longitude", longitude);
+                Log.v("Get long", " " + longitude);
+                startActivity(intent);
+            }
         }
     };
 }
