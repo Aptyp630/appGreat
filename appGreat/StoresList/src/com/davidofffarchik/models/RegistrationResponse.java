@@ -1,20 +1,20 @@
 package com.davidofffarchik.models;
 
-public class UserSuccess {
+public class RegistrationResponse {
 
     private User user;
     private boolean success;
 
-    public UserSuccess(User user, boolean success) {
+    public RegistrationResponse(User user, boolean success) {
         this.user = user;
         this.success = success;
     }
 
-    public UserSuccess(User user) {
+    public RegistrationResponse(User user) {
         this.user = user;
     }
 
-    public UserSuccess(boolean success) {
+    public RegistrationResponse(boolean success) {
         this.success = success;
     }
 

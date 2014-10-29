@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
+import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
-import com.davidofffarchik.models.UserSuccess;
 import com.davidofffarchik.webclient.WebClient;
 import com.davidofffarchik.webclient.WebClientListener;
 
@@ -51,10 +51,10 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getUserPassword = password.getText().toString();
                 String getUserConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
-                UserSuccess userSuccess = new UserSuccess(new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName));
-                WebClientListener<UserSuccess> webClientListener = new WebClientListener<UserSuccess>() {
+                //RegistrationResponse userSuccess = new RegistrationResponse(new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName));
+                WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
                     @Override
-                    public void onResponseSuccess(UserSuccess result) {
+                    public void onResponseSuccess(RegistrationResponse result) {
                         Log.v("Token from registered", "is " +result.getUser().getToken());
                         Intent intent = new Intent(getActivity(), AddNewShop.class);
                         intent.putExtra("token", result.getUser().getToken());
@@ -66,7 +66,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                         Toast.makeText(getActivity(), "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
                     }
                 };
-                WebClient.callRegistration(getActivity(), userSuccess, webClientListener);
+                WebClient.callRegistration(getActivity(), new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName), webClientListener);
                 /*
                 QueryToEnter queryToEnter = new QueryToEnter();
                 QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {

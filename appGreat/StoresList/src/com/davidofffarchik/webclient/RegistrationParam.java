@@ -3,17 +3,17 @@ package com.davidofffarchik.webclient;
 import android.content.Context;
 import android.util.Log;
 import com.android.volley.Request;
+import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
-import com.davidofffarchik.models.UserSuccess;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegistrationParam  extends Parameter<UserSuccess> {
+public class RegistrationParam  extends Parameter<RegistrationResponse> {
 
-   private UserSuccess userSuccess;
+   private User user;
 
-    public RegistrationParam(UserSuccess userSuccess){
-        this.userSuccess = userSuccess;
+    public RegistrationParam(User user){
+        this.user = user;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class RegistrationParam  extends Parameter<UserSuccess> {
     }
 
     @Override
-    public UserSuccess parseResponse(Context context, JSONObject jsonObject) {
+    public RegistrationResponse parseResponse(Context context, JSONObject jsonObject) {
         try {
             if(jsonObject.has("user")) {
                 JSONObject jsonRegistration = jsonObject.getJSONObject("user");
@@ -33,13 +33,13 @@ public class RegistrationParam  extends Parameter<UserSuccess> {
                 boolean success = jsonRegistration.getBoolean("success");
                 Log.v("Success", "is " + success);
                 Log.v("Что я парсю", "" + jsonRegistration);
-                return new UserSuccess(new User(token));
+                return new RegistrationResponse(new User(token));
             }else{
                 String message = jsonObject.getString("message");
                 Log.v("Message", "is " + message);
                 boolean success = jsonObject.getBoolean("success");
                 Log.v("Success", "is " + success);
-                return new UserSuccess(success);
+                return new RegistrationResponse(success);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -51,10 +51,10 @@ public class RegistrationParam  extends Parameter<UserSuccess> {
     public JSONObject getBody() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("email", userSuccess.getUser().getEmail());
-            jsonObject.put("password", userSuccess.getUser().getPassword());
-            jsonObject.put("password_confirmation", userSuccess.getUser().getConfirmedPassword());
-            jsonObject.put("username", userSuccess.getUser().getUserName());
+            jsonObject.put("email", user.getEmail());
+            jsonObject.put("password", user.getPassword());
+            jsonObject.put("password_confirmation", user.getConfirmedPassword());
+            jsonObject.put("username", user.getUserName());
             Log.v("Отправленные данные при регистрации", "" +jsonObject);
             return jsonObject;
         }catch (Exception e){

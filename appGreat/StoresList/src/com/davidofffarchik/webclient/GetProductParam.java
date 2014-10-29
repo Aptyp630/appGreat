@@ -23,8 +23,7 @@ public class GetProductParam extends Parameter<ProductResult>{
     public ProductResult parseResponse(Context context, JSONObject jsonObject) {
         Pagination pagination = parsePagination(jsonObject);
         List<Product> products = parseProducts(jsonObject);
-        ProductResult productResult = new ProductResult(pagination, products);
-        return productResult;
+        return new ProductResult(pagination, products);
     }
 
     @Override

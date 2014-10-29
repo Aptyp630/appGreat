@@ -9,8 +9,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.models.Product;
+import com.davidofffarchik.models.ProductResult;
+import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
-import com.davidofffarchik.models.UserSuccess;
 import org.json.JSONObject;
 
 public class WebClient {
@@ -23,16 +24,16 @@ public class WebClient {
     }
 
     public static void callGetProducts(WebClientListener webClientListener){
-
+        Parameter<ProductResult> parameter = new GetProductParam();
     }
 
-    public static void callRegistration(Context context, UserSuccess userSuccess, WebClientListener<UserSuccess> webClientListener) {
+    public static void callRegistration(Context context, User user, WebClientListener<RegistrationResponse> webClientListener) {
 
-        Parameter<UserSuccess> parameter = new RegistrationParam(userSuccess);
+        Parameter<RegistrationResponse> parameter = new RegistrationParam(user);
             makeRequest(context, parameter, webClientListener);
     }
 
-    private static void makeRequest(final Context context, final Parameter<UserSuccess> parameter, final WebClientListener<UserSuccess> webClientListener){
+    private static void makeRequest(final Context context, final Parameter<RegistrationResponse> parameter, final WebClientListener<RegistrationResponse> webClientListener){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = parameter.getUrl();
         JSONObject jsonObject = parameter.getBody();
