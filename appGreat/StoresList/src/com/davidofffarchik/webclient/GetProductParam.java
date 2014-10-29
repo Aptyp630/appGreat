@@ -2,18 +2,29 @@ package com.davidofffarchik.webclient;
 
 
 import android.content.Context;
-import com.davidofffarchik.models.Success;
+import com.android.volley.Request;
+import com.davidofffarchik.models.Pagination;
+import com.davidofffarchik.models.Product;
+import com.davidofffarchik.models.ProductResult;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GetProductParam extends Parameter<Success>{
+import java.util.ArrayList;
+import java.util.List;
+
+public class GetProductParam extends Parameter<ProductResult>{
     @Override
     public int getRequestMethod() {
-        return 0;
+        return Request.Method.GET;
     }
 
     @Override
-    public Success parseResponse(Context context, JSONObject jsonObject) {
-        return null;
+    public ProductResult parseResponse(Context context, JSONObject jsonObject) {
+        Pagination pagination = parsePagination(jsonObject);
+        List<Product> products = parseProducts(jsonObject);
+        ProductResult productResult = new ProductResult(pagination, products);
+        return productResult;
     }
 
     @Override
@@ -24,5 +35,37 @@ public class GetProductParam extends Parameter<Success>{
     @Override
     public String getApiMethod() {
         return null;
+    }
+
+    private static Pagination parsePagination(JSONObject jsonObject){
+        try {
+            JSONObject paginationJson = jsonObject.getJSONObject("pagination");
+            int total_page = paginationJson.getInt("total_page");
+            int current_page = paginationJson.getInt("current_page");
+            int per_page = paginationJson.getInt("per_page");
+            return new Pagination(total_page, current_page, per_page);
+        } catch (JSONException e) {e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static List<Product> parseProducts(JSONObject jsonObject){
+        List<Product> listProduct = new ArrayList<Product>();
+        try {
+            JSONArray productsJsonArray = jsonObject.getJSONArray("products");
+            for(int i=0; i<productsJsonArray.length(); i++){
+                JSONObject jObj = productsJsonArray.getJSONObject(i);
+                int id = jObj.getInt("id");
+                String title = jObj.getString("title");
+                String description = jObj.getString("description");
+                Double latitude = jObj.getDouble("lat");
+                Double longitude = jObj.getDouble("long");
+                Product product = new Product(id, title, description, latitude, longitude);
+                listProduct.add(product);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return listProduct;
     }
 }

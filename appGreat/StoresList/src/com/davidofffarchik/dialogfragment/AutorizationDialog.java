@@ -47,7 +47,6 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
                         intent.putExtra("token", token);
                         startActivity(intent);
                     }
-
                     @Override
                     public void responseError() {
                             Toast.makeText(getActivity(), "Нет такого E-mail в базе", Toast.LENGTH_SHORT).show();
