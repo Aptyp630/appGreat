@@ -55,18 +55,20 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
-                        Log.v("Token from registered", "is " +result.getUser().getToken());
-                        Intent intent = new Intent(getActivity(), AddNewShop.class);
-                        intent.putExtra("token", result.getUser().getToken());
-                        startActivity(intent);
+                        if(result.getUser() != null) {
+                            Intent intent = new Intent(getActivity(), AddNewShop.class);
+                            intent.putExtra("token", result.getUser().getToken());
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(getActivity(), result.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
                     }
-
                     @Override
                     public void onResponseError() {
                         Toast.makeText(getActivity(), "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
                     }
                 };
-                WebClient.callRegistration(user, webClientListener);
+                WebClient.getInstance().callRegistration(user, webClientListener);
                 /*
                 QueryToEnter queryToEnter = new QueryToEnter();
                 QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {

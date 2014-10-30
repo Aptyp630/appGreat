@@ -1,12 +1,12 @@
-package com.davidofffarchik.webclient;
+package com.davidofffarchik;
 
 import android.app.Application;
 
-public class GetOwnContext extends Application {
-    private static GetOwnContext singleton;
+public class StoresListApp extends Application {
+    private static StoresListApp singleton;
 
     // Returns the application instance
-    public static GetOwnContext getInstance() {
+    public static StoresListApp getInstance() {
         return singleton;
     }
 

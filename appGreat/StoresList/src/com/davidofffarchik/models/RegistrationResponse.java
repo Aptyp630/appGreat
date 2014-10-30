@@ -4,18 +4,23 @@ public class RegistrationResponse {
 
     private User user;
     private boolean success;
-
-    public RegistrationResponse(User user, boolean success) {
-        this.user = user;
-        this.success = success;
-    }
+    private String message;
 
     public RegistrationResponse(User user) {
         this.user = user;
     }
 
-    public RegistrationResponse(boolean success) {
+    public RegistrationResponse(boolean success, String message) {
         this.success = success;
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public User getUser() {

@@ -4,16 +4,32 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.davidofffarchik.StoresListApp;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
 import org.json.JSONObject;
 
 public class WebClient {
 
-private RequestQueue queue;
+    private static WebClient instance;
+    private RequestQueue queue;
 
-    public WebClient(RequestQueue queue) {
-        this.queue = queue;
+    private WebClient(){
+    }
+
+    public static synchronized WebClient getInstance() {
+        if (instance == null) {
+            instance = new WebClient();
+        }
+        return instance;
+    }
+
+    private RequestQueue getRequestQueue() {
+        if (queue == null) {
+            queue = Volley.newRequestQueue(StoresListApp.getInstance().getApplicationContext());
+        }
+        return queue;
     }
 
     /*
@@ -28,13 +44,12 @@ private RequestQueue queue;
 
         }
     */
-    public static void callRegistration(User user, WebClientListener<RegistrationResponse> webClientListener) {
+    public void callRegistration(User user, WebClientListener<RegistrationResponse> webClientListener) {
         Parameter<RegistrationResponse> parameter = new RegistrationParam(user);
-            makeRequest(parameter, webClientListener);
+        makeRequest(parameter, webClientListener);
     }
 
-    private static void makeRequest (final Parameter parameter, final WebClientListener webClientListener){
-        
+    private void makeRequest(final Parameter parameter, final WebClientListener webClientListener){
         int requestMethod = parameter.getRequestMethod();
         String url = parameter.getUrl();
         String apiMethod = parameter.getApiMethod();
@@ -46,13 +61,12 @@ private RequestQueue queue;
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
+            public void onErrorResponse(VolleyError volleyError){
                 webClientListener.onResponseError();
             }
         });
-        queue.add(jsonObjectRequest);
+        getRequestQueue().add(jsonObjectRequest);
     }
-
     /*
 
 
@@ -76,7 +90,5 @@ private RequestQueue queue;
         });
         queue.add(jsonObjectRequest);
     }
-
-
     */
 }
