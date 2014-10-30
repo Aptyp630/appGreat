@@ -6,9 +6,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.StoresListApp;
+import com.davidofffarchik.models.Product;
+import com.davidofffarchik.models.ProductResult;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class WebClient {
 
@@ -39,11 +43,12 @@ public class WebClient {
         public static void callLogin(, WebClientListener webClientListener){
 
         }
-
-        public static void callGetProducts(, WebClientListener webClientListener){
-
+*/
+        public void callGetProducts(WebClientListener<ProductResult> webClientListener, int page){
+            Parameter<ProductResult> parameter = new GetProductParam(page);
+            makeRequest(parameter, webClientListener);
         }
-    */
+
     public void callRegistration(User user, WebClientListener<RegistrationResponse> webClientListener) {
         Parameter<RegistrationResponse> parameter = new RegistrationParam(user);
         makeRequest(parameter, webClientListener);

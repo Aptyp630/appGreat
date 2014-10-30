@@ -14,6 +14,12 @@ import java.util.List;
 
 public class GetProductParam extends Parameter<ProductResult>{
 
+    private int page;
+
+    public GetProductParam(int page) {
+        this.page = page;
+    }
+
     @Override
     public int getRequestMethod() {
         return Request.Method.GET;
@@ -33,7 +39,7 @@ public class GetProductParam extends Parameter<ProductResult>{
 
     @Override
     public String getApiMethod() {
-        return null;
+        return "product_list.json?page=";
     }
 
     private static Pagination parsePagination(JSONObject jsonObject){
