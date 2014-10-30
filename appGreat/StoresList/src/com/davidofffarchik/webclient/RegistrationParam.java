@@ -1,14 +1,14 @@
 package com.davidofffarchik.webclient;
 
-import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegistrationParam  extends Parameter<RegistrationResponse> {
+public class RegistrationParam extends Parameter<RegistrationResponse> {
 
    private User user;
 
@@ -22,7 +22,7 @@ public class RegistrationParam  extends Parameter<RegistrationResponse> {
     }
 
     @Override
-    public RegistrationResponse parseResponse(Context context, JSONObject jsonObject) {
+    public RegistrationResponse parseResponse(JSONObject jsonObject) {
         try {
             if(jsonObject.has("user")) {
                 JSONObject jsonRegistration = jsonObject.getJSONObject("user");
@@ -39,6 +39,7 @@ public class RegistrationParam  extends Parameter<RegistrationResponse> {
                 Log.v("Message", "is " + message);
                 boolean success = jsonObject.getBoolean("success");
                 Log.v("Success", "is " + success);
+                Toast.makeText(GetOwnContext.getInstance(), "Такой Email уже есть в базе!", Toast.LENGTH_LONG).show();
                 return new RegistrationResponse(success);
             }
         } catch (JSONException e) {

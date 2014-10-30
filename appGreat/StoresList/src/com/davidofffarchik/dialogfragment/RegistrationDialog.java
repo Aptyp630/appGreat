@@ -51,7 +51,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                 String getUserPassword = password.getText().toString();
                 String getUserConfirmedPassword = confirmPassword.getText().toString();
                 String getUserName = userName.getText().toString();
-                //RegistrationResponse userSuccess = new RegistrationResponse(new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName));
+                User user = new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName);
                 WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
@@ -66,7 +66,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                         Toast.makeText(getActivity(), "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
                     }
                 };
-                WebClient.callRegistration(getActivity(), new User(getUserEmail, getUserPassword, getUserConfirmedPassword, getUserName), webClientListener);
+                WebClient.callRegistration(user, webClientListener);
                 /*
                 QueryToEnter queryToEnter = new QueryToEnter();
                 QueryToEnter.OnCreateProductFromRegistration listener = new QueryToEnter.OnCreateProductFromRegistration() {

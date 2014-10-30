@@ -1,7 +1,6 @@
 package com.davidofffarchik.webclient;
 
 
-import android.content.Context;
 import com.android.volley.Request;
 import com.davidofffarchik.models.Pagination;
 import com.davidofffarchik.models.Product;
@@ -14,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetProductParam extends Parameter<ProductResult>{
+
     @Override
     public int getRequestMethod() {
         return Request.Method.GET;
     }
 
     @Override
-    public ProductResult parseResponse(Context context, JSONObject jsonObject) {
+    public ProductResult parseResponse(JSONObject jsonObject) {
         Pagination pagination = parsePagination(jsonObject);
         List<Product> products = parseProducts(jsonObject);
         return new ProductResult(pagination, products);
