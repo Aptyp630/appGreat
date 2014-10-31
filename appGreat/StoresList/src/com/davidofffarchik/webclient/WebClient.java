@@ -6,6 +6,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.StoresListApp;
+import com.davidofffarchik.models.ProductResult;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
 import org.json.JSONObject;
@@ -35,15 +36,14 @@ public class WebClient {
     /*
         public static void callCreateNewProduct(Parameter<ProductResult> productResultParameter, WebClientListener webClientListener) {
         }
-
         public static void callLogin(, WebClientListener webClientListener){
-
         }
+*/
+    public void callGetProducts(WebClientListener<ProductResult> webClientListener, int page){
+        Parameter<ProductResult> parameter = new GetProductParam(page);
+        makeRequest(parameter, webClientListener);
+    }
 
-        public static void callGetProducts(, WebClientListener webClientListener){
-
-        }
-    */
     public void callRegistration(User user, WebClientListener<RegistrationResponse> webClientListener) {
         Parameter<RegistrationResponse> parameter = new RegistrationParam(user);
         makeRequest(parameter, webClientListener);
@@ -68,8 +68,6 @@ public class WebClient {
         getRequestQueue().add(jsonObjectRequest);
     }
     /*
-
-
     private static void makeRequest(final Context context, final Parameter<RegistrationResponse> parameter, final WebClientListener<RegistrationResponse> webClientListener){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = parameter.getUrl();
