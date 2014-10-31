@@ -1,4 +1,4 @@
-package com.davidofffarchik.query;
+/*package com.davidofffarchik.query;
 
 import android.content.Context;
 import com.android.volley.Request;
@@ -84,4 +84,4 @@ public class QueryToServer {
         public void onProductsReceived(ProductResult productResult);
         public void errorInternetConnection();
     }
-}
+}*/

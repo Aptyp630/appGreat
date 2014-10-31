@@ -11,8 +11,6 @@ public class Product implements Serializable{
     private Double latitude;
     private Double longitude;
 
-    //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
-
     public Product(int productId, String title, String description, Double latitude, Double longitude) {
         this(title, description, latitude, longitude);
         this.productId = productId;

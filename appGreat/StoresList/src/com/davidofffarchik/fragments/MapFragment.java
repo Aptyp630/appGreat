@@ -28,14 +28,11 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
     public void addMarkers() {
         List<Product> productList = getProductsFromDB();
         map.setOnInfoWindowClickListener(this);
-        for (int i = 0; i < productList.size(); i++) {
-            //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
-            //double latitude = (double) Math.round(Math.random()*(-50));
-            //double longitude = (double) Math.round(Math.random()*50);
+        for (Product product : productList) {
             map.addMarker(new MarkerOptions()
-                    .position(new LatLng(productList.get(i).getLatitude(), productList.get(i).getLongitude()))
-                    .title(productList.get(i).getTitle())
-                    .snippet(productList.get(i).getDescription())
+                    .position(new LatLng(product.getLatitude(), product.getLongitude()))
+                    .title(product.getTitle())
+                    .snippet(product.getDescription())
                     .draggable(true));
         }
     }
@@ -53,14 +50,13 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
             CreateDialog createDialog = new CreateDialog();
             createDialog.show(getFragmentManager(), Constans.FRG_LOG);
             List<Product> productList = getProductsFromDB();
-        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
-            for (int i = 0; i < productList.size(); i++) {
-                Product product = new Product(
-                        productList.get(i).getProductId(),
-                        marker.getTitle(),
-                        marker.getSnippet(),
-                        productList.get(i).getLatitude(),
-                        productList.get(i).getLongitude()
+            for (Product product : productList) {
+                product = new Product(
+                productList.iterator().next().getProductId(),
+                marker.getTitle(),
+                marker.getSnippet(),
+                productList.iterator().next().getLatitude(),
+                productList.iterator().next().getLongitude()
                 );
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constans.PRODUCT, product);

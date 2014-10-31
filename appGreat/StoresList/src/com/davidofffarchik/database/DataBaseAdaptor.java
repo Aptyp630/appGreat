@@ -62,7 +62,6 @@ public class DataBaseAdaptor{
     }
 
     private Product getProductByID(int id){
-        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         String where = ProductTable.PRODUCT_ID + "=" + id;
         Cursor cursor = sq.query(true, ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, where, null, null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -77,7 +76,6 @@ public class DataBaseAdaptor{
    }
 
    private void addProduct(Product product){
-       //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
            ContentValues contentValues = new ContentValues();
            contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
            contentValues.put(ProductTable.PRODUCT_TITLE, product.getTitle());
@@ -88,7 +86,6 @@ public class DataBaseAdaptor{
    }
 
     private void updateProduct(Product product){
-        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         ContentValues contentValues = new ContentValues();
         String where = ProductTable.PRODUCT_ID + "=" + product.getProductId();
         contentValues.put(ProductTable.PRODUCT_ID, product.getProductId());
@@ -100,7 +97,6 @@ public class DataBaseAdaptor{
     }
 
     public List<Product> getProductTitle(){
-        //ИЗМЕНЕНИЯ СОГЛАСНО СТРАНИЦАМ ЛАТИТУД И ЛОНГИТУД
         List<Product> productList = new ArrayList<Product>();
             Cursor cursor = sq.query(ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null);
         if(cursor.moveToFirst()){

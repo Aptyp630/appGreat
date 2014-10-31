@@ -31,7 +31,6 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
         Button cancelBtn = (Button) view.findViewById(R.id.cancelBtn);
         entering.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
-
         return view;
     }
 
@@ -50,15 +49,12 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
                             intent.putExtra("token", result.getUser().getToken());
                             startActivity(intent);
                     }
-
                     @Override
                     public void onResponseError() {
                         Toast.makeText(getActivity(), "Проверьте корректность ввода данных и наличие Интернета!", Toast.LENGTH_SHORT).show();
                     }
                 };
                 WebClient.getInstance().callLogin(user, webClientListener);
-
-
 /*
                 QueryToEnter.OnCreateProductFromLogin listener = new QueryToEnter.OnCreateProductFromLogin() {
 

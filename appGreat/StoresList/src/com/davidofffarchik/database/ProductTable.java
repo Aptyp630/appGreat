@@ -11,6 +11,7 @@ public class ProductTable {
     public final static String PRODUCT_LATITUDE = "latitude";
     public final static String PRODUCT_LONGITUDE = "longitude";
     public final static String[] ALL_COLUMNS = new String[] {UID, PRODUCT_ID, PRODUCT_TITLE, PRODUCT_DESCRIPTION, PRODUCT_LATITUDE, PRODUCT_LONGITUDE};
+
     //############################################################################
 
     public final static String DB_NAME = "products";

@@ -1,4 +1,4 @@
-package com.davidofffarchik.query;
+/*package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
@@ -67,4 +67,4 @@ public class QueryRegistration{
         public void errorInternetConnectionRegistration();
     }
 
-}
+}*/

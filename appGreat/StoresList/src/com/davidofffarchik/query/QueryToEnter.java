@@ -1,4 +1,4 @@
-package com.davidofffarchik.query;
+/*package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
@@ -142,4 +142,4 @@ public void queryLogin(final Context context,
     }
 
     //************************************Request for Login - end*****************************************************
-}
+}*/

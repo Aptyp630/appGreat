@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class GetMapToAddMarker extends FragmentActivity{
 
-    SupportMapFragment supportMapFragment;
+    private SupportMapFragment supportMapFragment;
     private GoogleMap googleMap;
     private Marker marker;
     private Button getCoordinates;
@@ -47,7 +47,7 @@ public class GetMapToAddMarker extends FragmentActivity{
     GoogleMap.OnMarkerDragListener dragListener = new GoogleMap.OnMarkerDragListener() {
         @Override
         public void onMarkerDragStart(Marker marker) {
-            Toast.makeText(getApplicationContext(), "Перетащите маркер в любое место", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Что бы получить координаты, перетащите маркер в любой место!", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -68,7 +68,7 @@ public class GetMapToAddMarker extends FragmentActivity{
         @Override
         public void onClick(View view) {
             if(latitude == 0.0 || longitude == 0.0) {
-                Toast.makeText(getApplicationContext(), "Before drag the Marker", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Прежде чем отправить координаты, Вы должны их получить перетаскиванием маркера!", Toast.LENGTH_SHORT).show();
             }else {
                 Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
                 intent.putExtra("latitude", latitude);

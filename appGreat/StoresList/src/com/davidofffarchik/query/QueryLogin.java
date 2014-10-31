@@ -1,4 +1,4 @@
-package com.davidofffarchik.query;
+/*package com.davidofffarchik.query;
 
 import android.content.Context;
 import android.util.Log;
@@ -60,4 +60,4 @@ public class QueryLogin{
         public void createNewShopLogin(String token);
         public void errorInternetConnectionLogin();
     }
-}
+}*/

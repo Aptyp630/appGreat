@@ -26,7 +26,6 @@ public class StoreFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    //Callback for listView in ListFragment
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         CreateDialog productDialog = new CreateDialog();

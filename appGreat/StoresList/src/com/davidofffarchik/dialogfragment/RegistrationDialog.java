@@ -60,7 +60,7 @@ public class RegistrationDialog extends DialogFragment implements View.OnClickLi
                             intent.putExtra("token", result.getUser().getToken());
                             startActivity(intent);
                         }else {
-                            Toast.makeText(getActivity(), result.getMessage().toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), result.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override

@@ -20,10 +20,8 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ActionBar actionbar = getSupportActionBar();
-        //устанавливаем режим навигации
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        //first TAB item
         ActionBar.Tab tabStore = actionbar.newTab();
         tabStore.setText(R.string.stores);
         tabStore.setTabListener(this);
@@ -31,7 +29,6 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         actionbar.addTab(tabStore);
         tabStore.setTabListener(this);
 
-        //second TAB item
         ActionBar.Tab tabMap = actionbar.newTab();
         tabMap.setText(R.string.map);
         tabMap.setTabListener(this);
@@ -40,7 +37,6 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         tabMap.setTabListener(this);
     }
 
-    //выбранный таб
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         if(Constans.TAG_STORES.equals(tab.getTag())){
@@ -52,18 +48,11 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         }
     }
 
-    //метод, который уведомляет, что выбранный таб уже не выбран, т.к.
-    //был выбран следующий таб
     @Override
-    public void onTabUnselected(ActionBar.Tab tab,  FragmentTransaction ft) {
-        //nothing doing
-    }
+    public void onTabUnselected(ActionBar.Tab tab,  FragmentTransaction ft) {}
 
-    //таб, который был выбран снова
     @Override
-    public void onTabReselected(ActionBar.Tab tab,  FragmentTransaction ft) {
-        //nothing doing
-    }
+    public void onTabReselected(ActionBar.Tab tab,  FragmentTransaction ft) {}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
