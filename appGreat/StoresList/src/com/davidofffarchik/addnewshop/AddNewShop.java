@@ -8,9 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.models.NewProductResponse;
 import com.davidofffarchik.models.Product;
-import com.davidofffarchik.query.QueryCreateNewProduct;
+import com.davidofffarchik.models.User;
+import com.davidofffarchik.webclient.WebClient;
+import com.davidofffarchik.webclient.WebClientListener;
 
 public class AddNewShop extends Activity implements View.OnClickListener{
 
@@ -79,8 +83,20 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         Double latitude = Double.valueOf(getLatitude());
         Double longitude = Double.valueOf(getLongitude());
         String token = getSavedToken();
-        QueryCreateNewProduct queryCreateNewProduct = new QueryCreateNewProduct();
-        queryCreateNewProduct.addNewProductToServer(this, new Product(title, description, latitude, longitude), token);
+        WebClientListener webClientListener = new WebClientListener() {
+            @Override
+            public void onResponseSuccess(Object result) {
+                Toast.makeText(getApplicationContext(), "Новый продукт был добавлен", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponseError() {
+                Toast.makeText(getApplicationContext(), "Вы заполнили не все поля!", Toast.LENGTH_LONG).show();
+            }
+        };
+        //QueryCreateNewProduct queryCreateNewProduct = new QueryCreateNewProduct();
+        //queryCreateNewProduct.addNewProductToServer(this, new Product(title, description, latitude, longitude), token);
+        WebClient.getInstance().callCreateNewProduct(new NewProductResponse(new User(token), new Product(title, description, latitude, longitude)), webClientListener);
     }
 
     @Override

@@ -1,10 +1,11 @@
-package com.davidofffarchik.webclient;
+package com.davidofffarchik.webclientparams;
 
 
 import com.android.volley.Request;
 import com.davidofffarchik.models.Pagination;
 import com.davidofffarchik.models.Product;
 import com.davidofffarchik.models.ProductResult;
+import com.davidofffarchik.webclient.Parameter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,11 +13,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetProductParam extends Parameter<ProductResult>{
+public class ProductQueryParam extends Parameter<ProductResult> {
 
     private int page;
 
-    public GetProductParam(int page) {
+    public ProductQueryParam(int page) {
         this.page = page;
     }
 

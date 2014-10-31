@@ -11,7 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
-import com.davidofffarchik.query.QueryToEnter;
+import com.davidofffarchik.models.RegistrationResponse;
+import com.davidofffarchik.models.User;
+import com.davidofffarchik.webclient.WebClient;
+import com.davidofffarchik.webclient.WebClientListener;
 
 public class AutorizationDialog extends DialogFragment implements View.OnClickListener{
 
@@ -38,7 +41,25 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
             case R.id.enteringBtn :
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
+                User user = new User(email, password);
 
+                WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
+                    @Override
+                    public void onResponseSuccess(RegistrationResponse result) {
+                            Intent intent = new Intent(getActivity(), AddNewShop.class);
+                            intent.putExtra("token", result.getUser().getToken());
+                            startActivity(intent);
+                    }
+
+                    @Override
+                    public void onResponseError() {
+                        Toast.makeText(getActivity(), "Проверьте корректность ввода данных и наличие Интернета!", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                WebClient.getInstance().callLogin(user, webClientListener);
+
+
+/*
                 QueryToEnter.OnCreateProductFromLogin listener = new QueryToEnter.OnCreateProductFromLogin() {
 
                     @Override
@@ -54,6 +75,7 @@ public class AutorizationDialog extends DialogFragment implements View.OnClickLi
                 };
                 QueryToEnter queryToEnter = new QueryToEnter();
                 queryToEnter.queryLogin(this.getActivity(), email, password, listener);
+                */
                 break;
             case R.id.cancelBtn : dismiss();
                 break;

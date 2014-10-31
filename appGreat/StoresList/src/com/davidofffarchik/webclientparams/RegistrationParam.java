@@ -1,9 +1,10 @@
-package com.davidofffarchik.webclient;
+package com.davidofffarchik.webclientparams;
 
 import android.util.Log;
 import com.android.volley.Request;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
+import com.davidofffarchik.webclient.Parameter;
 import org.json.JSONException;
 import org.json.JSONObject;
 

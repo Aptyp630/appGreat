@@ -6,9 +6,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.StoresListApp;
-import com.davidofffarchik.models.ProductResult;
-import com.davidofffarchik.models.RegistrationResponse;
-import com.davidofffarchik.models.User;
+import com.davidofffarchik.models.*;
+import com.davidofffarchik.webclientparams.LoginParam;
+import com.davidofffarchik.webclientparams.NewProductParam;
+import com.davidofffarchik.webclientparams.ProductQueryParam;
+import com.davidofffarchik.webclientparams.RegistrationParam;
 import org.json.JSONObject;
 
 public class WebClient {
@@ -32,15 +34,18 @@ public class WebClient {
         }
         return queue;
     }
+    public void callCreateNewProduct(NewProductResponse newProductResponse, WebClientListener<Product> webClientListener) {
+        Parameter<Product> parameter = new NewProductParam(newProductResponse);
+        makeRequest(parameter, webClientListener);
+    }
 
-    /*
-        public static void callCreateNewProduct(Parameter<ProductResult> productResultParameter, WebClientListener webClientListener) {
-        }
-        public static void callLogin(, WebClientListener webClientListener){
-        }
-*/
+    public void callLogin(User user, WebClientListener<RegistrationResponse> webClientListener){
+        Parameter<RegistrationResponse> parameter = new LoginParam(user);
+        makeRequest(parameter, webClientListener);
+    }
+
     public void callGetProducts(WebClientListener<ProductResult> webClientListener, int page){
-        Parameter<ProductResult> parameter = new GetProductParam(page);
+        Parameter<ProductResult> parameter = new ProductQueryParam(page);
         makeRequest(parameter, webClientListener);
     }
 
