@@ -27,7 +27,7 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="descriptionToMap">Before get coordinates of your new Product on the Map push button below and set new position of your new Product. Then, returned and will show in fields your "latitude" and "longitude"</string>
-    <string name="representTextToSignin">Before to create new Product, you are must to SIGN UP.</string>
-    <string name="representTextToLogin">If you are already done registration, you are must only LOGIN to your account to create new Product</string>
     <string name="getCoordinates">Get Coordinates</string>
+    <string name="deleteProduct">Delete</string>
+    <string name="updateProduct">Update</string>
 </resources>

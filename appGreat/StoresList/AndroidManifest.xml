@@ -27,10 +27,11 @@
                  android:icon="@drawable/ic_launcher"
                  android:theme="@style/Theme.AppCompat">
 
-        <activity android:name=".addnewshop.autorization.SignInRegister"/>
+        <activity android:name=".addnewshop.autorization.Registration"/>
+        <activity android:name=".main.Main"/>
         <activity android:name=".addnewshop.AddNewShop"/>
         <activity android:name=".addnewshop.GetMapToAddMarker"/>
-        <activity android:name="com.davidofffarchik.main.Main"
+        <activity android:name="com.davidofffarchik.addnewshop.autorization.SignInRegister"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

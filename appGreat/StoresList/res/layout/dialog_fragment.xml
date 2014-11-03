@@ -28,7 +28,22 @@
                 android:id="@+id/btnCancel"
                 android:text="@string/cancel"
                 android:textColor="#ffffff"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"/>
+                android:layout_gravity="center"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUpdate"
+                android:text="@string/updateProduct"
+                android:textColor="#ff007227"
+                android:layout_gravity="center"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDelete"
+                android:text="@string/deleteProduct"
+                android:textColor="#ff830001"
+                android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>

@@ -7,10 +7,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.davidofffarchik.StoresListApp;
 import com.davidofffarchik.models.*;
-import com.davidofffarchik.webclientparams.LoginParam;
-import com.davidofffarchik.webclientparams.NewProductParam;
-import com.davidofffarchik.webclientparams.ProductQueryParam;
-import com.davidofffarchik.webclientparams.RegistrationParam;
+import com.davidofffarchik.webclientparams.*;
 import org.json.JSONObject;
 
 public class WebClient {
@@ -34,6 +31,12 @@ public class WebClient {
         }
         return queue;
     }
+
+    public void callDeleteProduct(NewProductResponse newProductResponse, WebClientListener<RegistrationResponse> webClientListener){
+        Parameter<RegistrationResponse> parameter = new ProductDeleteParam(newProductResponse);
+        makeRequest(parameter, webClientListener);
+    }
+
     public void callCreateNewProduct(NewProductResponse newProductResponse, WebClientListener<Product> webClientListener) {
         Parameter<Product> parameter = new NewProductParam(newProductResponse);
         makeRequest(parameter, webClientListener);

@@ -5,38 +5,27 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/representTextToSignin"
-                android:text="@string/representTextToSignin"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="20sp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="#ffffcc"/>
-        <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/signInBtn"
-                android:id="@+id/signInBtn"
-                android:padding="20dp"
-                android:textSize="20sp"
-                android:layout_marginBottom="50dp"
-                android:textColor="#ffff7000"/>
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/representTextToLogin"
-                android:text="@string/representTextToLogin"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:textSize="20sp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textColor="#ffffcc"/>
+    <EditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/registerEmail"
+              android:layout_marginBottom="15dp"
+              android:id="@+id/email"/>
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registerPassword"
+            android:id="@+id/password"
+            android:password="true"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="20dp">
 
         <Button
                 android:layout_width="match_parent"
@@ -45,5 +34,17 @@
                 android:id="@+id/loginBtn"
                 android:textSize="20sp"
                 android:padding="20dp"
-                android:textColor="#ffff7000"/>
+                android:textColor="#ffff7000"
+                android:layout_weight="1"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/signInBtn"
+                android:id="@+id/signInBtn"
+                android:padding="20dp"
+                android:textSize="20sp"
+                android:textColor="#ffff7000"
+                android:layout_weight="1"/>
+        </LinearLayout>
 </LinearLayout>

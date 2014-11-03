@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.davidofffarchik.R;
-import com.davidofffarchik.addnewshop.autorization.SignInRegister;
+import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.fragments.MapFragment;
 import com.davidofffarchik.fragments.StoreFragment;
@@ -35,6 +35,11 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         tabMap.setTag(Constans.TAG_MAP);
         actionbar.addTab(tabMap);
         tabMap.setTabListener(this);
+    }
+
+    public String getToken(){
+        Intent intent = getIntent();
+        return intent.getExtras().getString("token");
     }
 
     @Override
@@ -64,7 +69,9 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action :
-                Intent intent = new Intent(this, SignInRegister.class);
+                Intent intent = new Intent(this, AddNewShop.class);
+                intent.putExtra("token", getToken());
+                //Intent intent = new Intent(this, SignInRegister.class);
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

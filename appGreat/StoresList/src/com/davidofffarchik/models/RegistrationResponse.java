@@ -15,6 +15,10 @@ public class RegistrationResponse {
         this.message = message;
     }
 
+    public RegistrationResponse(String message) {
+        this.message = message;
+    }
+
     public String getMessage() {
         return message;
     }
