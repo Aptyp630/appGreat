@@ -32,7 +32,7 @@ public class WebClient {
         return queue;
     }
 
-    public void callDeleteProduct(NewProductResponse newProductResponse, WebClientListener<RegistrationResponse> webClientListener){
+    public void callDeleteProduct(NewProductResponse newProductResponse, WebClientListener<NewProductResponse> webClientListener){
         Parameter<RegistrationResponse> parameter = new ProductDeleteParam(newProductResponse);
         makeRequest(parameter, webClientListener);
     }
