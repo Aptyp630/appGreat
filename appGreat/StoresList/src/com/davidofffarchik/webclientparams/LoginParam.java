@@ -26,7 +26,7 @@ public class LoginParam extends Parameter<RegistrationResponse> {
         try {
                 JSONObject jsonLogin = jsonObject.getJSONObject("user");
                 String token = jsonLogin.getString("token");
-                Log.v("Token", "is " + token);
+                Log.v("Pars Token", " " + token);
                 jsonLogin.getString("email");
                 jsonLogin.getBoolean("success");
                 return new RegistrationResponse(new User(token));
@@ -42,7 +42,7 @@ public class LoginParam extends Parameter<RegistrationResponse> {
         try {
             jsonObject.put("email", user.getEmail());
             jsonObject.put("password", user.getPassword());
-            Log.v("То, что мы отправили", "" + jsonObject);
+            Log.v("Send Data for Login", " " + jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }

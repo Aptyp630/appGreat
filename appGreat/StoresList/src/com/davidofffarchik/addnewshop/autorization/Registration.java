@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
-import com.davidofffarchik.addnewshop.AddNewShop;
+import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
 import com.davidofffarchik.webclient.WebClient;
@@ -48,7 +48,7 @@ public class Registration extends Activity implements View.OnClickListener{
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
                         if(result.getUser() != null) {
-                            Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
+                            Intent intent = new Intent(getApplicationContext(), Main.class);
                             intent.putExtra("token", result.getUser().getToken());
                             startActivity(intent);
                         }else {

@@ -4,6 +4,15 @@ public class NewProductResponse {
 
     private User user;
     private Product product;
+    private String message;
+
+    public NewProductResponse(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 
     public NewProductResponse(User user, Product product) {
         this.user = user;

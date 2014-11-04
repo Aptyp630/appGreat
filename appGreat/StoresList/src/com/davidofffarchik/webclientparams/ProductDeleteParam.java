@@ -1,14 +1,12 @@
 package com.davidofffarchik.webclientparams;
 
-import android.util.Log;
 import com.android.volley.Request;
 import com.davidofffarchik.models.NewProductResponse;
-import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.webclient.Parameter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ProductDeleteParam extends Parameter<RegistrationResponse>{
+public class ProductDeleteParam extends Parameter<NewProductResponse>{
 
     private NewProductResponse newProductResponse;
 
@@ -22,10 +20,10 @@ public class ProductDeleteParam extends Parameter<RegistrationResponse>{
     }
 
     @Override
-    public RegistrationResponse parseResponse(JSONObject jsonObject) {
-        JSONObject jsonDeleteProduct = new JSONObject();
+    public NewProductResponse parseResponse(JSONObject jsonObject) {
         try {
-            return new RegistrationResponse(jsonDeleteProduct.getString("message"));
+            String message = jsonObject.getString("message");
+            return new NewProductResponse(message);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -36,9 +34,8 @@ public class ProductDeleteParam extends Parameter<RegistrationResponse>{
     public JSONObject getBody() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", newProductResponse.getUser().getEmail());
+            jsonObject.put("id", newProductResponse.getProduct().getProductId());
             jsonObject.put("token", newProductResponse.getUser().getToken());
-            Log.v("То, что мы отправили при удалении товара", "" + jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }

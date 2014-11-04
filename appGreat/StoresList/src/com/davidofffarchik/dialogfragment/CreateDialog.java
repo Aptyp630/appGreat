@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.StoresListApp;
-import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.NewProductResponse;
@@ -23,15 +22,6 @@ import com.davidofffarchik.webclient.WebClient;
 import com.davidofffarchik.webclient.WebClientListener;
 
 public class CreateDialog extends DialogFragment implements View.OnClickListener{
-
-    public static CreateDialog newInstance(String num) {
-        CreateDialog f = new CreateDialog();
-        // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putString("num", num);
-        f.setArguments(args);
-        return f;
-    }
 
     public View onCreateView (LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -62,32 +52,38 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
         return (Product) this.getArguments().getSerializable(Constans.PRODUCT);
     }
 
+    private String getTokenDialogFragment(){
+        Bundle bundle = getArguments();
+        return bundle.getString("token");
+
+        Нужно поробовать сохранить токен
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnCancel : dismiss();
                 break;
             case R.id.btnDelete :
-                WebClientListener<NewProductResponse> newProductResponseWebClientListener = new WebClientListener<NewProductResponse>() {
+                final WebClientListener<NewProductResponse> newProductResponseWebClientListener = new WebClientListener<NewProductResponse>() {
                     @Override
                     public void onResponseSuccess(NewProductResponse result) {
-                        Toast.makeText(StoresListApp.getInstance().getApplicationContext(), "Продукт был удален!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(StoresListApp.getInstance().getApplicationContext(), Main.class);
-                        startActivity(intent);
+                            Toast.makeText(StoresListApp.getInstance().getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(StoresListApp.getInstance().getApplicationContext(), Main.class);
+                            intent.putExtra("token", result.getUser().getToken());
+                            Log.v("Передаем токен в мейн, после удаления товара", " " +result.getUser().getToken());
+                            startActivity(intent);
                     }
 
                     @Override
                     public void onResponseError() {
-
                     }
                 };
-                String token = getArguments().getString("token");
                 Product product = getProduct();
-                //String token = addNewShop.getSavedToken();
-                Log.v("Токен при удалении товара", "" +token);
+                String token = getTokenDialogFragment();
+                Log.v("Передаем токен перед удалением товара", " " + token);
                 User user = new User(token);
                 NewProductResponse newProductResponse = new NewProductResponse(user, product);
-                Log.v("Модель при удалении товара", "" +newProductResponse);
                 WebClient.getInstance().callDeleteProduct(newProductResponse, newProductResponseWebClientListener);
                 break;
         }

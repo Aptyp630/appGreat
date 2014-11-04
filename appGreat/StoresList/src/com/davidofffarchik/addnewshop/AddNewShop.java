@@ -68,11 +68,9 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         Log.v(PRIVATE_TOKEN, "сохранился " +returnToken());
     }
 
-    public String getSavedToken(){
+    private String getSavedToken(){
         sharedPreferences = getPreferences(MODE_PRIVATE);
-        String getSavedToken = sharedPreferences.getString(PRIVATE_TOKEN, returnToken());
-        Log.v(PRIVATE_TOKEN, " " +getSavedToken);
-        return getSavedToken;
+        return sharedPreferences.getString(PRIVATE_TOKEN, returnToken());
     }
 
     public void passDataToQuery(){
