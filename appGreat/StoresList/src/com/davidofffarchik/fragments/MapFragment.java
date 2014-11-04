@@ -32,8 +32,7 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
             map.addMarker(new MarkerOptions()
                     .position(new LatLng(product.getLatitude(), product.getLongitude()))
                     .title(product.getTitle())
-                    .snippet(product.getDescription())
-                    .draggable(true));
+                    .snippet(product.getDescription()));
         }
     }
 

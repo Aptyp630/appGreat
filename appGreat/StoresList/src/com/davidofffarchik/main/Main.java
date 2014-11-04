@@ -1,27 +1,33 @@
 package com.davidofffarchik.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.davidofffarchik.R;
 import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.dialogfragment.CreateDialog;
 import com.davidofffarchik.fragments.MapFragment;
 import com.davidofffarchik.fragments.StoreFragment;
 
 public class Main extends ActionBarActivity implements ActionBar.TabListener {
 
-    @Override
+    private SharedPreferences sharedPreferences;
+    private final static String PRIVATE_TOKEN = "private_token";
+
+   @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
         ActionBar actionbar = getSupportActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
         ActionBar.Tab tabStore = actionbar.newTab();
         tabStore.setText(R.string.stores);
         tabStore.setTabListener(this);
@@ -37,8 +43,12 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         tabMap.setTabListener(this);
     }
 
-    public String getToken(){
+    public String getToken() {
         Intent intent = getIntent();
+        Log.v("Создали токен после захода на страницу", "" + intent.getExtras().getString("token"));
+        Bundle bundle = new Bundle();
+        bundle.putString(Constans.PRODUCT, intent.getExtras().getString("token"));
+        productDialog.setArguments(bundle);
         return intent.getExtras().getString("token");
     }
 
