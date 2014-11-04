@@ -20,7 +20,7 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     private SharedPreferences sharedPreferences;
     private final static String PRIVATE_TOKEN = "mainToken";
 
-    @Override
+   @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
