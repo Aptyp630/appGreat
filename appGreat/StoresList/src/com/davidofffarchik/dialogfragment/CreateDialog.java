@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.StoresListApp;
 import com.davidofffarchik.UserToken;
+import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
 import com.davidofffarchik.main.Main;
@@ -59,8 +60,12 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
             case R.id.btnCancel : dismiss();
                 break;
             case R.id.btnUpdate :
-                    Log.v("Latitude", " " + getProduct().getLatitude());
-                    Log.v("Longitude", " " + getProduct().getLongitude());
+                Intent intent = new Intent(getActivity().getApplicationContext(), AddNewShop.class);
+                intent.putExtra("title", getProduct().getTitle());
+                intent.putExtra("description", getProduct().getDescription());
+                intent.putExtra("latitude", getProduct().getLatitude());
+                intent.putExtra("longitude", getProduct().getLongitude());
+                startActivity(intent);
                 break;
             case R.id.btnDelete :
                 WebClientListener<NewProductResponse> newProductResponseWebClientListener = new WebClientListener<NewProductResponse>() {

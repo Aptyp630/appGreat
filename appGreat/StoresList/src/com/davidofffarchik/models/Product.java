@@ -8,10 +8,10 @@ public class Product implements Serializable{
     private int productId;
     private String title;
     private String description;
-    private Double latitude;
-    private Double longitude;
+    private double latitude;
+    private double longitude;
 
-    public Product(int productId, String title, String description, Double latitude, Double longitude) {
+    public Product(int productId, String title, String description, double latitude, double longitude) {
         this(title, description, latitude, longitude);
         this.productId = productId;
     }
@@ -21,10 +21,6 @@ public class Product implements Serializable{
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public int getProductId() {

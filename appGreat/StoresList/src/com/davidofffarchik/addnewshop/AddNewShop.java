@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.UserToken;
 import com.davidofffarchik.models.NewProductResponse;
 import com.davidofffarchik.models.Product;
 import com.davidofffarchik.models.User;
@@ -31,12 +32,18 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_new_shop);
+        productName = (EditText) findViewById(R.id.putNameShop);
+        productDescription = (EditText) findViewById(R.id.putDescription);
+
+        productName.setText(getProductTitle());
+        productDescription.setText(getProductDescription());
+        //getProductLatitude();
+        //getProductLongitude();
 
         //удаляет клавиатуру после загрузки активити
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //############################
-
-        setContentView(R.layout.add_new_shop);
         pickMap = (Button) findViewById(R.id.pickMap);
         createShop = (Button) findViewById(R.id.createShop);
         pickMap.setOnClickListener(this);
@@ -62,10 +69,31 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     }
 
     public String returnToken(){
-        Intent intent = getIntent();
-        return intent.getExtras().getString("token");
+        return UserToken.getInstance().getSavedToken();
+        //Intent intent = getIntent();
+        //return intent.getExtras().getString("token");
     }
 
+    private String getProductTitle(){
+        Bundle extras = getIntent().getExtras();
+        return extras.getString("title");
+    }
+
+    private String getProductDescription(){
+        Bundle extras = getIntent().getExtras();
+        return extras.getString("description");
+    }
+
+  /*  private String getProductLatitude(){
+        Bundle extras = getIntent().getExtras();
+        return extras.getString("latitude");
+    }
+
+    private String getProductLongitude(){
+        Bundle extras = getIntent().getExtras();
+        return extras.getString("longitude");
+    }*/
+/*
     private void saveToken(){
         sharedPreferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -78,15 +106,16 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         sharedPreferences = getPreferences(MODE_PRIVATE);
         return sharedPreferences.getString(PRIVATE_TOKEN, returnToken());
     }
-
+*/
     public void passDataToQuery(){
-        productName = (EditText) findViewById(R.id.putNameShop);
-        productDescription = (EditText) findViewById(R.id.putDescription);
+        //productName = (EditText) findViewById(R.id.putNameShop);
+        //productDescription = (EditText) findViewById(R.id.putDescription);
         String title = productName.getText().toString();
         String  description = productDescription.getText().toString();
         Double latitude = Double.valueOf(getLatitude());
         Double longitude = Double.valueOf(getLongitude());
-        String token = getSavedToken();
+        //String token = getSavedToken();
+        String token = returnToken();
         WebClientListener webClientListener = new WebClientListener() {
             @Override
             public void onResponseSuccess(Object result) {
@@ -109,7 +138,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
             case R.id.pickMap :
                 Intent intent = new Intent(this, GetMapToAddMarker.class);
                 startActivity(intent);
-                saveToken();
+                //saveToken();
                 Log.v("Token", "" +returnToken());
                 break;
             case R.id.createShop :
