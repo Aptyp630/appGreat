@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.UserToken;
 import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
@@ -43,6 +44,7 @@ public class SignInRegister extends FragmentActivity implements View.OnClickList
                 WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
+                        UserToken.getInstance().saveToken(result.getUser().getToken());
                         Intent intent = new Intent(getApplicationContext(), Main.class);
                         intent.putExtra("token", result.getUser().getToken());
                         startActivity(intent);

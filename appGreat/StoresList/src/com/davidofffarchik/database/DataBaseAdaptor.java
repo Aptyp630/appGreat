@@ -113,6 +113,8 @@ public class DataBaseAdaptor{
         return productList;
     }
 
+
+
     public static class DataBase extends SQLiteOpenHelper {
 
         public DataBase(Context context) {

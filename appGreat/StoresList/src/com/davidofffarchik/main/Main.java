@@ -1,12 +1,10 @@
 package com.davidofffarchik.main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.davidofffarchik.R;
@@ -17,10 +15,7 @@ import com.davidofffarchik.fragments.StoreFragment;
 
 public class Main extends ActionBarActivity implements ActionBar.TabListener {
 
-    private SharedPreferences sharedPreferences;
-    private final static String PRIVATE_TOKEN = "mainToken";
-
-   @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -42,38 +37,18 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         tabMap.setTabListener(this);
     }
 
-    private String getToken() {
+    public String getToken() {
         Intent intent = getIntent();
         return intent.getExtras().getString("token");
-    }
-
-    private void saveToken(){
-        sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putString(PRIVATE_TOKEN, getToken());
-        edit.commit();
-        Log.v(PRIVATE_TOKEN, "saveToken " + getToken());
-    }
-
-    private String getSavedToken(){
-        sharedPreferences = getPreferences(MODE_PRIVATE);
-        String getSavedToken = sharedPreferences.getString(PRIVATE_TOKEN, getToken());
-        Log.v(PRIVATE_TOKEN, "getSavedToken " + getSavedToken);
-        return getSavedToken;
     }
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         if(Constans.TAG_STORES.equals(tab.getTag())){
             StoreFragment storeList = new StoreFragment();
-            saveToken();
-            Bundle bundle = new Bundle();
-            bundle.putString("token", getToken());
-            storeList.setArguments(bundle);
             ft.replace(R.id.fragments_view_two, storeList, Constans.TAG_STORES);
         }else{
             MapFragment storeMap = new MapFragment();
-            saveToken();
             ft.replace(R.id.fragments_view_two, storeMap, Constans.TAG_MAP);
         }
     }
@@ -95,7 +70,7 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
         switch (item.getItemId()){
             case R.id.action :
                 Intent intent = new Intent(this, AddNewShop.class);
-                intent.putExtra("token", getSavedToken());
+                intent.putExtra("token", getToken());
                 //Intent intent = new Intent(this, SignInRegister.class);
                 startActivity(intent);
         }

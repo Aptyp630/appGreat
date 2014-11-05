@@ -2,18 +2,15 @@ package com.davidofffarchik;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.util.Log;
 
-public class UserToken extends ListFragment{
+public class UserToken {
 
     private SharedPreferences sharedPreferences;
-    private final static String PRIVATE_TOKEN = "userToken";
-/*
+    private final static String PREFERENCES = "shared";
     private static UserToken instance;
 
-    public UserToken (){
+    private UserToken (){
     }
 
     public static UserToken getInstance(){
@@ -21,25 +18,19 @@ public class UserToken extends ListFragment{
             instance = new UserToken();
         }
         return instance;
-    }*/
-
-    private String getTokenStoreFragment(){
-        Bundle bundle = getArguments();
-        Log.v("Log id UserToken", " " +bundle.getString("token"));
-        return bundle.getString("token");
     }
 
-    public void saveToken(){
-        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putString(PRIVATE_TOKEN, getTokenStoreFragment());
-        edit.commit();
+    public void saveToken(String token){
+        sharedPreferences = StoresListApp.getInstance().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Log.v("Show Token in Singleton", " " + token);
+        editor.putString("token", token);
+        editor.commit();
     }
 
     public String getSavedToken(){
-        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String getSavedToken = sharedPreferences.getString(PRIVATE_TOKEN, getTokenStoreFragment());
-        Log.v(PRIVATE_TOKEN, " " +getTokenStoreFragment());
-        return getSavedToken;
+        sharedPreferences = StoresListApp.getInstance().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("token", "");
     }
+
 }
