@@ -61,6 +61,7 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
                 break;
             case R.id.btnUpdate :
                 Intent intent = new Intent(getActivity().getApplicationContext(), AddNewShop.class);
+                intent.putExtra("id", getProduct().getProductId());
                 intent.putExtra("title", getProduct().getTitle());
                 intent.putExtra("description", getProduct().getDescription());
                 intent.putExtra("latitude", getProduct().getLatitude());

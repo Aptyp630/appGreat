@@ -2,6 +2,7 @@ package com.davidofffarchik.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
 import com.davidofffarchik.dialogfragment.CreateDialog;
@@ -54,8 +55,8 @@ public class MapFragment extends SupportMapFragment implements GoogleMap.OnInfoW
                 productList.iterator().next().getProductId(),
                 marker.getTitle(),
                 marker.getSnippet(),
-                productList.iterator().next().getLatitude(),
-                productList.iterator().next().getLongitude()
+                marker.getPosition().latitude,
+                marker.getPosition().longitude
                 );
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(Constans.PRODUCT, product);

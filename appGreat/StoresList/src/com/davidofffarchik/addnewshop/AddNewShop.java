@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
 import com.davidofffarchik.UserToken;
+import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.NewProductResponse;
 import com.davidofffarchik.models.Product;
 import com.davidofffarchik.models.User;
@@ -26,6 +27,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     private EditText longitude;
     private Button pickMap;
     private Button createShop;
+    private Button updateShop;
     private SharedPreferences sharedPreferences;
     private final static String PRIVATE_TOKEN = "private_token";
 
@@ -46,8 +48,10 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         //############################
         pickMap = (Button) findViewById(R.id.pickMap);
         createShop = (Button) findViewById(R.id.createShop);
+        updateShop = (Button) findViewById(R.id.updateShop);
         pickMap.setOnClickListener(this);
         createShop.setOnClickListener(this);
+        updateShop.setOnClickListener(this);
         getLatitude();
         getLongitude();
     }
@@ -72,6 +76,11 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         return UserToken.getInstance().getSavedToken();
         //Intent intent = getIntent();
         //return intent.getExtras().getString("token");
+    }
+
+    private int getProductID(){
+        Bundle extras = getIntent().getExtras();
+        return extras.getInt("id");
     }
 
     private String getProductTitle(){
@@ -141,12 +150,34 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 //saveToken();
                 Log.v("Token", "" +returnToken());
                 break;
+
             case R.id.createShop :
                 passDataToQuery();
                 productName.setText("");
                 productDescription.setText("");
                 latitude.setText("0.0");
                 longitude.setText("0.0");
+                intent = new Intent(this, Main.class);
+                startActivity(intent);
+                break;
+
+            case R.id.updateShop :
+                WebClientListener<NewProductResponse> webClientListener = new WebClientListener<NewProductResponse>(){
+
+                    @Override
+                    public void onResponseSuccess(NewProductResponse result) {
+
+                    }
+
+                    @Override
+                    public void onResponseError() {
+
+                    }
+                };
+                Product product = new Product(getProductID(), getProductTitle(), getProductDescription(), Double.valueOf(getLatitude()), Double.valueOf(getLongitude()));
+                User user = new User(UserToken.getInstance().getSavedToken());
+                NewProductResponse newProductResponse = new NewProductResponse(user, product);
+                WebClient.getInstance().callUpdateProduct(newProductResponse, webClientListener);
                 break;
         }
     }
