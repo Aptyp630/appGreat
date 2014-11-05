@@ -15,6 +15,7 @@ import com.davidofffarchik.R;
 import com.davidofffarchik.StoresListApp;
 import com.davidofffarchik.UserToken;
 import com.davidofffarchik.constans.Constans;
+import com.davidofffarchik.database.DataBaseAdaptor;
 import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.NewProductResponse;
 import com.davidofffarchik.models.Product;
@@ -40,8 +41,10 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
         textDesc.setText(getString(R.string.product_description_dialog) + " " +productDescription);
 
         Button btnCancel = (Button) view.findViewById(R.id.btnCancel);
+        Button btnUpdate = (Button) view.findViewById(R.id.btnUpdate);
         Button btnDelete = (Button) view.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(this);
+        btnUpdate.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         return view;
     }
@@ -55,28 +58,46 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
         switch(v.getId()){
             case R.id.btnCancel : dismiss();
                 break;
+            case R.id.btnUpdate :
+                    Log.v("Latitude", " " + getProduct().getLatitude());
+                    Log.v("Longitude", " " + getProduct().getLongitude());
+                break;
             case R.id.btnDelete :
                 WebClientListener<NewProductResponse> newProductResponseWebClientListener = new WebClientListener<NewProductResponse>() {
                     @Override
                     public void onResponseSuccess(NewProductResponse result) {
-                        Toast.makeText(StoresListApp.getInstance().getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                        String message = "product deleted";
+                        if(result.getMessage().equals(message)) {
+                            Toast.makeText(StoresListApp.getInstance().getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                            DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(getActivity().getApplicationContext());
+                            dataBaseAdaptor.openDB();
+                            dataBaseAdaptor.deleteRow(getProduct().getProductId());
+                            dataBaseAdaptor.closeDB();
+                            Intent intent = new Intent(StoresListApp.getInstance().getApplicationContext(), Main.class);
+                            intent.putExtra("token", UserToken.getInstance().getSavedToken());
+                            Log.v("Передаем токен в мейн, после удаления товара", " " + UserToken.getInstance().getSavedToken());
+                            startActivity(intent);
+                        }else
+                            Toast.makeText(getActivity().getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResponseError() {
+                        DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(getActivity().getApplicationContext());
+                        dataBaseAdaptor.openDB();
+                        dataBaseAdaptor.deleteRow(getProduct().getProductId());
+                        dataBaseAdaptor.closeDB();
                         Intent intent = new Intent(StoresListApp.getInstance().getApplicationContext(), Main.class);
                         intent.putExtra("token", UserToken.getInstance().getSavedToken());
                         Log.v("Передаем токен в мейн, после удаления товара", " " +UserToken.getInstance().getSavedToken());
                         startActivity(intent);
                     }
-
-                    @Override
-                    public void onResponseError() {
-
-                    }
                 };
                 String token = UserToken.getInstance().getSavedToken();
-                Product product = getProduct();
                 Log.v("Токен при удалении товара", "" +token);
                 User user = new User(token);
+                Product product = getProduct();
                 NewProductResponse newProductResponse = new NewProductResponse(user, product);
-                Log.v("Модель при удалении товара", "" +newProductResponse);
                 WebClient.getInstance().callDeleteProduct(newProductResponse, newProductResponseWebClientListener);
                 break;
         }

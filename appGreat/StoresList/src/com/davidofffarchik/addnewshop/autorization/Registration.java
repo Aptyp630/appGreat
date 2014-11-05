@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.davidofffarchik.R;
+import com.davidofffarchik.UserToken;
 import com.davidofffarchik.main.Main;
 import com.davidofffarchik.models.RegistrationResponse;
 import com.davidofffarchik.models.User;
@@ -48,6 +49,7 @@ public class Registration extends Activity implements View.OnClickListener{
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
                         if(result.getUser() != null) {
+                            UserToken.getInstance().saveToken(result.getUser().getToken());
                             Intent intent = new Intent(getApplicationContext(), Main.class);
                             intent.putExtra("token", result.getUser().getToken());
                             startActivity(intent);

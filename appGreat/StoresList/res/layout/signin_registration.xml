@@ -4,12 +4,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center">
+              android:paddingTop="50dp">
 
     <EditText
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/registerEmail"
+              android:inputType="textEmailAddress"
               android:layout_marginBottom="15dp"
               android:id="@+id/email"/>
 
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/registerPassword"
             android:id="@+id/password"
-            android:password="true"/>
+            android:inputType="textPassword"/>
 
     <LinearLayout
             android:layout_width="match_parent"

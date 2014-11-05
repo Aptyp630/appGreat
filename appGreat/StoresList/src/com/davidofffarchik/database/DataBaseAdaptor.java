@@ -52,6 +52,12 @@ public class DataBaseAdaptor{
         return cursor.getColumnNames();
     }
 
+    public void deleteRow(int id){
+        String where = ProductTable.PRODUCT_ID + "=" + id;
+        sq.delete(ProductTable.TABLE_NAME, where, null);
+        Log.v("Row was successfully deleted", "");
+    }
+
     public void saveProducts(List<Product> productList){
         for(Product product : productList){
             if(getProductByID(product.getProductId()) == null) {

@@ -44,10 +44,10 @@ public class SignInRegister extends FragmentActivity implements View.OnClickList
                 WebClientListener<RegistrationResponse> webClientListener = new WebClientListener<RegistrationResponse>() {
                     @Override
                     public void onResponseSuccess(RegistrationResponse result) {
-                        UserToken.getInstance().saveToken(result.getUser().getToken());
-                        Intent intent = new Intent(getApplicationContext(), Main.class);
-                        intent.putExtra("token", result.getUser().getToken());
-                        startActivity(intent);
+                            UserToken.getInstance().saveToken(result.getUser().getToken());
+                            Intent intent = new Intent(getApplicationContext(), Main.class);
+                            intent.putExtra("token", result.getUser().getToken());
+                            startActivity(intent);
                     }
                     @Override
                     public void onResponseError() {

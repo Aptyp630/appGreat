@@ -10,7 +10,6 @@ public class Product implements Serializable{
     private String description;
     private Double latitude;
     private Double longitude;
-    private String token;
 
     public Product(int productId, String title, String description, Double latitude, Double longitude) {
         this(title, description, latitude, longitude);
@@ -22,18 +21,6 @@ public class Product implements Serializable{
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public Product(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public static long getSerialVersionUID() {

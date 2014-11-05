@@ -1,5 +1,6 @@
 package com.davidofffarchik.webclientparams;
 
+import android.util.Log;
 import com.android.volley.Request;
 import com.davidofffarchik.models.NewProductResponse;
 import com.davidofffarchik.webclient.Parameter;

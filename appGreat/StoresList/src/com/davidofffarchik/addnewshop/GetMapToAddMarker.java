@@ -47,7 +47,7 @@ public class GetMapToAddMarker extends FragmentActivity{
     GoogleMap.OnMarkerDragListener dragListener = new GoogleMap.OnMarkerDragListener() {
         @Override
         public void onMarkerDragStart(Marker marker) {
-            Toast.makeText(getApplicationContext(), "Что бы получить координаты, перетащите маркер в любой место!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Что бы получить координаты, перетащите маркер в любое место!", Toast.LENGTH_LONG).show();
         }
 
         @Override

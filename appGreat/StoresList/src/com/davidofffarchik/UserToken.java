@@ -32,5 +32,4 @@ public class UserToken {
         sharedPreferences = StoresListApp.getInstance().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getString("token", "");
     }
-
 }
