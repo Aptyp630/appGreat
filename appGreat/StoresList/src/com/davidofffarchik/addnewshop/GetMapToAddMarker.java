@@ -76,7 +76,12 @@ public class GetMapToAddMarker extends FragmentActivity{
                 intent.putExtra("longitude", longitude);
                 Log.v("Get long", " " + longitude);
                 startActivity(intent);
+               /* Intent intent = new Intent();
+                intent.putExtra("latitude", latitude);
+                intent.putExtra("longitude", longitude);
+                setResult(RESULT_OK, intent);
+                finish();*/
             }
-        }
+            }
     };
 }

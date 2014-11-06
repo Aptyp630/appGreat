@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.davidofffarchik.R;
+import com.davidofffarchik.UserToken;
 import com.davidofffarchik.addnewshop.AddNewShop;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.fragments.MapFragment;
@@ -38,8 +39,9 @@ public class Main extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     public String getToken() {
-        Intent intent = getIntent();
-        return intent.getExtras().getString("token");
+        //Intent intent = getIntent();
+        //return intent.getExtras().getString("token");
+        return UserToken.getInstance().getSavedToken();
     }
 
     @Override

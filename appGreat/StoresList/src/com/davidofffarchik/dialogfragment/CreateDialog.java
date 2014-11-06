@@ -65,7 +65,9 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
                 intent.putExtra("title", getProduct().getTitle());
                 intent.putExtra("description", getProduct().getDescription());
                 intent.putExtra("latitude", getProduct().getLatitude());
+                Log.v("Update latitude", " " +getProduct().getLatitude());
                 intent.putExtra("longitude", getProduct().getLongitude());
+                Log.v("Update longitude", " " +getProduct().getLongitude());
                 startActivity(intent);
                 break;
             case R.id.btnDelete :

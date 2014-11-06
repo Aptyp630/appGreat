@@ -40,8 +40,6 @@ public class AddNewShop extends Activity implements View.OnClickListener{
 
         productName.setText(getProductTitle());
         productDescription.setText(getProductDescription());
-        //getProductLatitude();
-        //getProductLongitude();
 
         //удаляет клавиатуру после загрузки активити
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -74,8 +72,6 @@ public class AddNewShop extends Activity implements View.OnClickListener{
 
     public String returnToken(){
         return UserToken.getInstance().getSavedToken();
-        //Intent intent = getIntent();
-        //return intent.getExtras().getString("token");
     }
 
     private int getProductID(){
@@ -117,13 +113,10 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     }
 */
     public void passDataToQuery(){
-        //productName = (EditText) findViewById(R.id.putNameShop);
-        //productDescription = (EditText) findViewById(R.id.putDescription);
         String title = productName.getText().toString();
         String  description = productDescription.getText().toString();
         Double latitude = Double.valueOf(getLatitude());
         Double longitude = Double.valueOf(getLongitude());
-        //String token = getSavedToken();
         String token = returnToken();
         WebClientListener webClientListener = new WebClientListener() {
             @Override
@@ -143,22 +136,20 @@ public class AddNewShop extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
             case R.id.pickMap :
-                final Intent intentMap = new Intent(this, GetMapToAddMarker.class);
-                startActivity(intentMap);
+                intent = new Intent(this, GetMapToAddMarker.class);
+                //startActivityForResult(intent, 1);
+                startActivity(intent);
                 //saveToken();
                 Log.v("Token", "" +returnToken());
                 break;
 
             case R.id.createShop :
                 passDataToQuery();
-                productName.setText("");
-                productDescription.setText("");
-                latitude.setText("0.0");
-                longitude.setText("0.0");
-                Intent intentShop = new Intent(this, Main.class);
-                startActivity(intentShop);
+                intent = new Intent(this, Main.class);
+                startActivity(intent);
                 break;
 
             case R.id.updateShop :
@@ -172,7 +163,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
 
                     @Override
                     public void onResponseError() {
-                        Toast.makeText(getApplicationContext(), "Неполадки с интернетом!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Прежде чем обновить - создайте продукт!!", Toast.LENGTH_LONG).show();
                     }
                 };
                 Product product = new Product(getProductID(), productName.getText().toString(), productDescription.getText().toString(), Double.valueOf(getLatitude()), Double.valueOf(getLongitude()));
@@ -182,4 +173,15 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 break;
         }
     }
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data == null){
+            return;
+        }
+        double latitudeToUpdate = data.getDoubleExtra("latitude", 1);
+        latitude.setText(String.valueOf(latitudeToUpdate));
+        double longitudeToUpdate = data.getDoubleExtra("longitude", 2);
+        longitude.setText(String.valueOf(longitudeToUpdate));
+    }*/
 }

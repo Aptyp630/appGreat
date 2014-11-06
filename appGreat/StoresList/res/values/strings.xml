@@ -13,8 +13,8 @@
     <string name="load">Loading</string>
     <string name="shopTitle">Shop Title:</string>
     <string name="shopDescription">Shop Description:</string>
-    <string name="createShop">Create Shop</string>
-    <string name="updateShop">Update Shop</string>
+    <string name="createShop">Create Product</string>
+    <string name="updateShop">Update Product</string>
     <string name="pickMap">Pick Point the Map</string>
     <string name="registerEmail">E-mail</string>
     <string name="registerPassword">Password (min. 8 items)</string>
