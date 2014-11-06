@@ -1,6 +1,5 @@
 package com.davidofffarchik.webclientparams;
 
-import android.app.DownloadManager;
 import android.util.Log;
 import com.android.volley.Request;
 import com.davidofffarchik.UserToken;
@@ -10,8 +9,6 @@ import com.davidofffarchik.models.User;
 import com.davidofffarchik.webclient.Parameter;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 
 public class ProductUpdateParam extends Parameter<NewProductResponse>{
 

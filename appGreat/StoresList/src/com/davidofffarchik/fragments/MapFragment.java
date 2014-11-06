@@ -2,7 +2,6 @@ package com.davidofffarchik.fragments;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.database.DataBaseAdaptor;
 import com.davidofffarchik.dialogfragment.CreateDialog;

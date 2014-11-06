@@ -128,7 +128,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         WebClientListener webClientListener = new WebClientListener() {
             @Override
             public void onResponseSuccess(Object result) {
-                Toast.makeText(getApplicationContext(), "Новый продукт был добавлен", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Продукт успешно добавлен!", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -145,8 +145,8 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.pickMap :
-                Intent intent = new Intent(this, GetMapToAddMarker.class);
-                startActivity(intent);
+                final Intent intentMap = new Intent(this, GetMapToAddMarker.class);
+                startActivity(intentMap);
                 //saveToken();
                 Log.v("Token", "" +returnToken());
                 break;
@@ -157,24 +157,25 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 productDescription.setText("");
                 latitude.setText("0.0");
                 longitude.setText("0.0");
-                intent = new Intent(this, Main.class);
-                startActivity(intent);
+                Intent intentShop = new Intent(this, Main.class);
+                startActivity(intentShop);
                 break;
 
             case R.id.updateShop :
                 WebClientListener<NewProductResponse> webClientListener = new WebClientListener<NewProductResponse>(){
-
                     @Override
                     public void onResponseSuccess(NewProductResponse result) {
-
+                        Toast.makeText(getApplicationContext(), "Update product", Toast.LENGTH_LONG).show();
+                        Intent intentUpdate = new Intent(getApplicationContext(), Main.class);
+                        startActivity(intentUpdate);
                     }
 
                     @Override
                     public void onResponseError() {
-
+                        Toast.makeText(getApplicationContext(), "Неполадки с интернетом!", Toast.LENGTH_LONG).show();
                     }
                 };
-                Product product = new Product(getProductID(), getProductTitle(), getProductDescription(), Double.valueOf(getLatitude()), Double.valueOf(getLongitude()));
+                Product product = new Product(getProductID(), productName.getText().toString(), productDescription.getText().toString(), Double.valueOf(getLatitude()), Double.valueOf(getLongitude()));
                 User user = new User(UserToken.getInstance().getSavedToken());
                 NewProductResponse newProductResponse = new NewProductResponse(user, product);
                 WebClient.getInstance().callUpdateProduct(newProductResponse, webClientListener);

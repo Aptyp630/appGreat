@@ -1,5 +1,6 @@
 package com.davidofffarchik.webclient;
 
+import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -65,6 +66,7 @@ public class WebClient {
     private void makeRequest(final Parameter parameter, final WebClientListener webClientListener){
         int requestMethod = parameter.getRequestMethod();
         String url = parameter.getUrl();
+        Log.v("URL", " " +url);
         String apiMethod = parameter.getApiMethod();
         JSONObject jsonObject = parameter.getBody();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(requestMethod, url+apiMethod, jsonObject, new Response.Listener<JSONObject>() {

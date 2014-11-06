@@ -23,6 +23,7 @@ public class ProductDeleteParam extends Parameter<NewProductResponse>{
     @Override
     public NewProductResponse parseResponse(JSONObject jsonObject) {
         try {
+            Log.v("Ответ от сервера", " " +jsonObject.getString("message"));
             String message = jsonObject.getString("message");
             return new NewProductResponse(message);
         } catch (JSONException e) {
@@ -45,6 +46,6 @@ public class ProductDeleteParam extends Parameter<NewProductResponse>{
 
     @Override
     public String getApiMethod() {
-        return "delete_product.json?id="+newProductResponse.getProduct().getProductId();
+        return "delete_product.json?id="+newProductResponse.getProduct().getProductId()+"&token="+newProductResponse.getUser().getToken();
     }
 }
