@@ -70,17 +70,17 @@ public class GetMapToAddMarker extends FragmentActivity{
             if(latitude == 0.0 || longitude == 0.0) {
                 Toast.makeText(getApplicationContext(), "Прежде чем отправить координаты, Вы должны их получить перетаскиванием маркера!", Toast.LENGTH_SHORT).show();
             }else {
-                Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
+                /*Intent intent = new Intent(getApplicationContext(), AddNewShop.class);
                 intent.putExtra("latitude", latitude);
                 Log.v("Get lat", " " + latitude);
                 intent.putExtra("longitude", longitude);
                 Log.v("Get long", " " + longitude);
-                startActivity(intent);
-               /* Intent intent = new Intent();
+                startActivity(intent);*/
+                Intent intent = new Intent();
                 intent.putExtra("latitude", latitude);
                 intent.putExtra("longitude", longitude);
                 setResult(RESULT_OK, intent);
-                finish();*/
+                finish();
             }
             }
     };

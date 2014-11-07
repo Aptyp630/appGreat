@@ -2,7 +2,6 @@ package com.davidofffarchik.addnewshop;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +27,6 @@ public class AddNewShop extends Activity implements View.OnClickListener{
     private Button pickMap;
     private Button createShop;
     private Button updateShop;
-    private SharedPreferences sharedPreferences;
-    private final static String PRIVATE_TOKEN = "private_token";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,8 +137,8 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.pickMap :
                 intent = new Intent(this, GetMapToAddMarker.class);
-                //startActivityForResult(intent, 1);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+                //startActivity(intent);
                 //saveToken();
                 Log.v("Token", "" +returnToken());
                 break;
@@ -156,9 +153,13 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 WebClientListener<NewProductResponse> webClientListener = new WebClientListener<NewProductResponse>(){
                     @Override
                     public void onResponseSuccess(NewProductResponse result) {
-                        Toast.makeText(getApplicationContext(), "Update product", Toast.LENGTH_LONG).show();
-                        Intent intentUpdate = new Intent(getApplicationContext(), Main.class);
-                        startActivity(intentUpdate);
+                        if(result.getProduct() != null) {
+                            Toast.makeText(getApplicationContext(), "Update product", Toast.LENGTH_LONG).show();
+                            Intent intentUpdate = new Intent(getApplicationContext(), Main.class);
+                            startActivity(intentUpdate);
+                        }else{
+                            Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -173,7 +174,7 @@ public class AddNewShop extends Activity implements View.OnClickListener{
                 break;
         }
     }
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(data == null){
@@ -183,5 +184,5 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         latitude.setText(String.valueOf(latitudeToUpdate));
         double longitudeToUpdate = data.getDoubleExtra("longitude", 2);
         longitude.setText(String.valueOf(longitudeToUpdate));
-    }*/
+    }
 }

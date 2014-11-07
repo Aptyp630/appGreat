@@ -27,15 +27,20 @@ public class ProductUpdateParam extends Parameter<NewProductResponse>{
     public NewProductResponse parseResponse(JSONObject jsonObject) {
         Log.v("Что нам приходит после апа", " " +jsonObject);
         try {
-            JSONObject jsonParse = jsonObject.getJSONObject("product");
-            int id = jsonParse.getInt("id");
-            String title = jsonParse.getString("title");
-            String description = jsonParse.getString("description");
-            double latitude = jsonParse.getDouble("lat");
-            double longitude = jsonParse.getDouble("long");
-            User user = new User(UserToken.getInstance().getSavedToken());
-            Product product = new Product(id, title, description, latitude, longitude);
-            return new NewProductResponse(user, product);
+            if(jsonObject.has("product")) {
+                JSONObject jsonParse = jsonObject.getJSONObject("product");
+                int id = jsonParse.getInt("id");
+                String title = jsonParse.getString("title");
+                String description = jsonParse.getString("description");
+                double latitude = jsonParse.getDouble("lat");
+                double longitude = jsonParse.getDouble("long");
+                User user = new User(UserToken.getInstance().getSavedToken());
+                Product product = new Product(id, title, description, latitude, longitude);
+                return new NewProductResponse(user, product);
+            }else{
+                String message = jsonObject.getString("message");
+                return new NewProductResponse(message);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,6 +59,7 @@ public class ProductUpdateParam extends Parameter<NewProductResponse>{
             jsonProduct.put("long", newProductResponse.getProduct().getLongitude());
             parentObject.put("product", jsonProduct);
             parentObject.put("token", newProductResponse.getUser().getToken());
+            Log.v("Send Data for UpDate" , " " +parentObject);
             return parentObject;
         } catch (JSONException e) {
             e.printStackTrace();
