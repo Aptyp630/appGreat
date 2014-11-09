@@ -32,7 +32,6 @@ public class StoreFragment extends ListFragment {
             CreateDialog productDialog = new CreateDialog();
             productDialog.show(getFragmentManager(), Constans.FRG_LOG);
             Product product = (Product) l.getItemAtPosition(position);
-        Log.v("Latitude", " " +product.getLatitude());
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constans.PRODUCT, product);
             productDialog.setArguments(bundle);

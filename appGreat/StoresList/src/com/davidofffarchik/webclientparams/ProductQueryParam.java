@@ -1,7 +1,6 @@
 package com.davidofffarchik.webclientparams;
 
 
-import android.util.Log;
 import com.android.volley.Request;
 import com.davidofffarchik.models.Pagination;
 import com.davidofffarchik.models.Product;
@@ -41,7 +40,6 @@ public class ProductQueryParam extends Parameter<ProductResult> {
 
     @Override
     public String getApiMethod() {
-        Log.v("Количество страниц", "product_list.json?page="+page);
         return "product_list.json?page="+page;
     }
 

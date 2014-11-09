@@ -37,7 +37,9 @@ public class ProductDeleteParam extends Parameter<NewProductResponse>{
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id", newProductResponse.getProduct().getProductId());
+            Log.v("ID для удаления товара", " " +newProductResponse.getProduct().getProductId());
             jsonObject.put("token", newProductResponse.getUser().getToken());
+            Log.v("Token для удаления товара", " " +newProductResponse.getUser().getToken());
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -65,9 +65,9 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
                 intent.putExtra("title", getProduct().getTitle());
                 intent.putExtra("description", getProduct().getDescription());
                 intent.putExtra("latitude", getProduct().getLatitude());
-                Log.v("Update latitude", " " +getProduct().getLatitude());
+                Log.v("Lat передаю", " " +getProduct().getLatitude());
                 intent.putExtra("longitude", getProduct().getLongitude());
-                Log.v("Update longitude", " " +getProduct().getLongitude());
+                Log.v("Lщт передаю", " " +getProduct().getLongitude());
                 startActivity(intent);
                 break;
             case R.id.btnDelete :
@@ -83,7 +83,6 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
                             dataBaseAdaptor.closeDB();
                             Intent intent = new Intent(StoresListApp.getInstance().getApplicationContext(), Main.class);
                             intent.putExtra("token", UserToken.getInstance().getSavedToken());
-                            Log.v("Передаем токен в мейн, после удаления товара", " " + UserToken.getInstance().getSavedToken());
                             startActivity(intent);
                         }else
                             Toast.makeText(getActivity().getApplicationContext(), result.getMessage(), Toast.LENGTH_LONG).show();

@@ -63,18 +63,4 @@ public class SignInRegister extends FragmentActivity implements View.OnClickList
                 break;
         }
     }
-/*
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.signInBtn :
-            RegistrationDialog dialogFragment = new RegistrationDialog();
-            dialogFragment.show(getSupportFragmentManager(), Constans.FRG_LOG);
-                break;
-            case R.id.loginBtn :
-                AutorizationDialog autorizationDialog = new AutorizationDialog();
-                autorizationDialog.show(getSupportFragmentManager(), Constans.FRG_LOG);
-        }
-    }
-    */
 }
