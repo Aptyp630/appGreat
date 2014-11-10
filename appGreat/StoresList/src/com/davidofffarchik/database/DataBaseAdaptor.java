@@ -102,7 +102,7 @@ public class DataBaseAdaptor{
         sq.update(ProductTable.TABLE_NAME, contentValues, where, null);
     }
 
-    public List<Product> getProductTitle(){
+    public List<Product> getListOfProducts(){
         List<Product> productList = new ArrayList<Product>();
             Cursor cursor = sq.query(ProductTable.TABLE_NAME, ProductTable.ALL_COLUMNS, null, null, null, null, null);
         if(cursor.moveToFirst()){

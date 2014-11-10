@@ -9,7 +9,7 @@ public class Constans {
     public final static String LOG_TAG = "showTag";
 
     //STORE_FRAGMENT
-    public final static String FRG_LOG = "fragmentLog";
+    public final static String FRG_TAG = "fragmentLog";
 
     //MAIN
     public static final String TAG_STORES = "stores";

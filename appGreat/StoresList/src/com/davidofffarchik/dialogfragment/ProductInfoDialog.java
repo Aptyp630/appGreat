@@ -24,7 +24,7 @@ import com.davidofffarchik.models.User;
 import com.davidofffarchik.webclient.WebClient;
 import com.davidofffarchik.webclient.WebClientListener;
 
-public class CreateDialog extends DialogFragment implements View.OnClickListener{
+public class ProductInfoDialog extends DialogFragment implements View.OnClickListener{
 
     public View onCreateView (LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -67,7 +67,7 @@ public class CreateDialog extends DialogFragment implements View.OnClickListener
                 intent.putExtra("latitude", getProduct().getLatitude());
                 Log.v("Lat передаю", " " +getProduct().getLatitude());
                 intent.putExtra("longitude", getProduct().getLongitude());
-                Log.v("Lщт передаю", " " +getProduct().getLongitude());
+                Log.v("Lon передаю", " " +getProduct().getLongitude());
                 startActivity(intent);
                 break;
             case R.id.btnDelete :

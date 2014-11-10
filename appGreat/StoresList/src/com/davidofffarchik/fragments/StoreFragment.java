@@ -2,13 +2,12 @@ package com.davidofffarchik.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import com.davidofffarchik.adapter.ProductListAdapter;
 import com.davidofffarchik.constans.Constans;
 import com.davidofffarchik.controller.StoresLoadController;
-import com.davidofffarchik.dialogfragment.CreateDialog;
+import com.davidofffarchik.dialogfragment.ProductInfoDialog;
 import com.davidofffarchik.models.Product;
 
 public class StoreFragment extends ListFragment {
@@ -29,8 +28,8 @@ public class StoreFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-            CreateDialog productDialog = new CreateDialog();
-            productDialog.show(getFragmentManager(), Constans.FRG_LOG);
+            ProductInfoDialog productDialog = new ProductInfoDialog();
+            productDialog.show(getFragmentManager(), Constans.FRG_TAG);
             Product product = (Product) l.getItemAtPosition(position);
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constans.PRODUCT, product);

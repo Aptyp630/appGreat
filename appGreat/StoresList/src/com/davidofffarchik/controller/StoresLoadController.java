@@ -50,7 +50,7 @@ public class StoresLoadController {
                 dialog.dismiss();
                 DataBaseAdaptor dataBaseAdaptor = new DataBaseAdaptor(context);
                 dataBaseAdaptor.openDB();
-                productList = dataBaseAdaptor.getProductTitle();
+                productList = dataBaseAdaptor.getListOfProducts();
                 adapter.addProducts(productList);
                 adapter.notifyDataSetChanged();
                 dataBaseAdaptor.closeDB();

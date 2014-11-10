@@ -3,7 +3,6 @@ package com.davidofffarchik.addnewshop;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -36,6 +35,8 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //############################
 
+        latitude = (EditText) findViewById(R.id.latitude);
+        longitude = (EditText) findViewById(R.id.longitude);
         productName = (EditText) findViewById(R.id.putNameShop);
         productDescription = (EditText) findViewById(R.id.putDescription);
         productName.setText(getProductTitle());
@@ -46,6 +47,8 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         pickMap.setOnClickListener(this);
         createShop.setOnClickListener(this);
         updateShop.setOnClickListener(this);
+        latitude.setText("10");
+        longitude.setText("20");
     }
 
     private int getProductID(){
@@ -130,8 +133,8 @@ public class AddNewShop extends Activity implements View.OnClickListener{
         if(data == null){
             return;
         }
-        latitude = (EditText) findViewById(R.id.latitude);
-        longitude = (EditText) findViewById(R.id.longitude);
+        //latitude = (EditText) findViewById(R.id.latitude);
+        //longitude = (EditText) findViewById(R.id.longitude);
         double latitudeToUpdate = data.getDoubleExtra("latitude", 1);
         latitude.setText(String.valueOf(latitudeToUpdate));
         double longitudeToUpdate = data.getDoubleExtra("longitude", 2);
